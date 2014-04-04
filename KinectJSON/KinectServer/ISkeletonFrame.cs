@@ -155,7 +155,7 @@ namespace KinectServer
             }
         }
 
-        private static bool logging = KinectServer.Server.logging;
+        private static bool logging = false;
         internal byte[] ToBytes()
         //internal IList<ArraySegment<byte>> ToBytes()
         {

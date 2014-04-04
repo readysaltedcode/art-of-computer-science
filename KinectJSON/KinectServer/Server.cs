@@ -12,129 +12,52 @@ namespace KinectServer
     {
         // the EndPoint corresponding to this server
         public static String serverEP = "http://localhost:8111/";
-        private static System.Diagnostics.Stopwatch stopwatch;
-        private static HttpListener server;
+        private HttpListener httpServer;
 
-        // These few variables would make good instance variables...
-        private static int framesToGet;
-        private static String callbackfn;
-        private static System.IO.StreamWriter clientWriter;
-        private static HttpListenerContext clientContext;
-
-        static readonly object locker = new object();
-        public static bool logging = false;
+        public bool logging = false;
         public static int INT64_BYTES = BitConverter.GetBytes(Int64.MaxValue).Length;
         public static int DOUBLE_BYTES = BitConverter.GetBytes(Double.MaxValue).Length;
 
-        public static void StartServer()
+        private SkeletonEventDispatcher source;
+        private Boolean running = false;
+
+        public Server(SkeletonEventDispatcher source)
         {
-            stopwatch = Program.stopwatch;
-            stopwatch.Start();
-            if (logging) Console.WriteLine("Listening for remoteEP");
-            Thread t = new Thread(() => Server.KinectServer());
-            t.Start();
+            this.source = source;
         }
 
-        private static void Connect()
+        /** 
+         * Run a blocking server
+         */
+        public void StartServer()
         {
-            if (server == null)
+            if (running) return;
+            running = true;
+            if (logging) Console.WriteLine("Listening on remoteEP "+serverEP);
+            Run();
+        }
+
+        private void Connect()
+        {
+            if (httpServer == null)
             {
-                server = new HttpListener();
-                server.Prefixes.Add(serverEP);
-                server.Start();
+                httpServer = new HttpListener();
+                httpServer.Prefixes.Add(serverEP);
+                httpServer.Start();
             }
             
-            clientContext = server.GetContext();
-            clientWriter = new System.IO.StreamWriter(clientContext.Response.OutputStream);
-
-            if (clientContext.Request.QueryString["frames"] != null)
-            {
-                framesToGet = int.Parse(clientContext.Request.QueryString["frames"]);
-            }
-            else
-            {
-                framesToGet = 1;
-            }
-
-            if (clientContext.Request.QueryString["callback"] != null)
-            {
-                callbackfn = clientContext.Request.QueryString["callback"];
-            }
-            else
-            {
-                callbackfn = null;
-            }
+            HttpListenerContext clientContext = httpServer.GetContext();
+            ServerTask spawnClient = new ServerTask(clientContext, source, logging);
+            Console.WriteLine("Spawning client");
         }
 
-        private static void Disconnect()
+        private void Run()
         {
-            clientWriter.Flush();
-            clientContext.Response.OutputStream.Close();
-        }
+            while (running){
 
-        private static void KinectServer()
-        {
-            while (Program.running)
-            {
-                TimeSpan startTime = Program.stopwatch.Elapsed;
                 if(logging)Console.WriteLine("Waiting for a connection");
                 Connect();
-
-                int lastFrameNumber = 0;
-
-                if (callbackfn!=null)
-                {
-                    SendString(callbackfn + "(");
-                }
-                if (framesToGet > 1) SendString("["); // when getting multiple frames, return in an array
-                for (int framesGot = 0; framesGot < framesToGet; ++framesGot )
-                {
-                    while (Program.skeletonFrame == null || Program.skeletonFrame.FrameNumber == lastFrameNumber) Thread.Sleep(5);
-                    Send(Program.skeletonFrame);
-                    lastFrameNumber = Program.skeletonFrame.FrameNumber;
-                    if (framesToGet - framesGot > 1) SendString(",");
-                }
-                if (framesToGet > 1) SendString("]");
-
-                if (callbackfn != null)
-                {
-                    SendString(")");
-                }
-                Disconnect();
-                TimeSpan endTime = stopwatch.Elapsed;
-                TimeSpan timeDiff = endTime - startTime;
             }
-        }
-
-        private static void Send(KinectSkeletonFrame skeletonFrame)
-        {
-            String buffer;
-            if (skeletonFrame != null)
-            {
-                try
-                {
-                    lock (locker)
-                    {
-                        // TODO: get the callback string from the URL prams
-                        buffer = skeletonFrame.toJSON();
-                    }
-                    SendString(buffer);
-                }
-                catch (Exception e) { Console.WriteLine("Failed to Send\n{0}", e.Message); }
-            }
-            else
-            {
-                Console.WriteLine("SkeletonFrame not ready");
-            }
-        }
-
-        private static void SendString(String toSend) {
-            try
-            {
-                clientWriter.Write(toSend);
-                if (logging) Console.WriteLine("Sent: {0}", toSend);
-            }
-            catch (Exception e) { Console.WriteLine("Failed to Send\n{0}", e.Message); }
         }
     }
 }
