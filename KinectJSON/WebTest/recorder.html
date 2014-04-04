@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 5//EN"
+    "http://www.w3.org/TR/html5/html5.dtd"
+    >
+<html lang="en"><head><title>KinectJSON Recorder</title></head><body>
+<h1>KinectJSON Recorder</h1><p>Press record to start recording, and stop to retrieve the recorded kinect data.</p>
+<p>Please be aware that only one instance of the recorder can be used at a time, this is purely to keep the implementation
+simple.</p>
+<p>The KinectServer usually gets around 30 skeleton frames per second</p>
+<input type="button" id="recordButton" name="recordButton" value="[rec]" />
+<br />
+<textarea id="results"></textarea>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+
+var jsonEndpointAddress = "http://localhost:8111/?callback=?";
+    
+function startRecording() {
+    $.getJSON(jsonEndpointAddress+"&recordState=START",recordingStarted);
+};
+
+function recordingStarted(data) {
+    if (data.status == "success") {
+        $("#recordButton").val("[stop]");
+        $("#recordButton").unbind('click');
+        $("#recordButton").click(stopRecording);
+        
+    }
+    else {
+        alert(data);
+    }
+}
+
+function stopRecording() {
+    $.getJSON(jsonEndpointAddress+"&recordState=STOP",recordingStopped);
+}
+
+function recordingStopped(data) {
+    $("#recordButton").unbind('click');
+    $("#recordButton").click(startRecording);
+        $("#recordButton").val("[rec]");
+    $("#results").val(JSON.stringify(data));
+}
+
+$(function(){
+   $("#recordButton").click(startRecording);
+});
+</script>
+</body></html>
