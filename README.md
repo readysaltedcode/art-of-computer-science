@@ -1,4 +1,4 @@
-art-of-computer-science
+Art-of-Computer-Science
 =======================
 
 This is the repository for the dance data visualisation project "The Art of Computer Science"
@@ -11,7 +11,7 @@ The work will interpret computer science theories through dance, relating the pr
 
 The site will consist of videos, ‘recipes’, links to the curriculum UK and others. We are hoping to make it a playground that the user can explore based on what they are looking for. Be it a particular curriculum element, type of sensor or specific piece of kit. We are very excited about be able to share all of resources including the code. This has only be made possible because of being one of Google RISE Award winners for 2014.
 
-Playground
+Playground: 
 Why have we decided to call the hack and workshop events playgrounds? Because we want it to be open to everyone not just experts. Plus the opportunity to just mess around and tinkering with code and electronics! How more playful can you get.
 
 Why Data Visualisation?
