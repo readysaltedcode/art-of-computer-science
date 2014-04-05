@@ -1,6 +1,10 @@
 Art-of-Computer-Science
 =======================
 
+
+[Google Doc](https://docs.google.com/document/d/1MBThZQQWu1dVeKyJLdNsdH0PuhiQeGUTzW_2hLD_vHo/edit?usp=sharing)
+
+
 This is the repository for the dance data visualisation project "The Art of Computer Science"
 
 There are 2 sides to this project one involving a live performance and the other a sire for sharing and documenting the whole project. The Live Performance “Arrastre” and the project website (this won’t go live until early Summer 2014)
