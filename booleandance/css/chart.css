@@ -1,0 +1,72 @@
+body {
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 13px;
+  color: #666;
+  background-color: #f0f0f0;
+}
+
+strong {
+  font-weight: bold;
+}
+a, a:visited {
+  color: #999;
+}
+
+canvas {
+  /*border: 1px solid #ddd;*/
+  display: block;
+  /*position: absolute;*/
+  top: 0;
+  left: 120px;
+  margin: 20px auto;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  font-size: 32px;
+  padding: 20px;
+  font-weight: 300;
+  /*letter-spacing: -2px;*/
+  font-family: 'Monoton', cursive;
+}
+.options {
+  position: absolute;
+  top: 72px;
+  left: 20px;
+  width: 320px;
+}
+
+.options .option {
+  width: 128px;
+  font-size: 12px;
+  padding: 8px 8px;
+  /*border: 1px solid #ddd;*/
+  margin-bottom: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  /*text-align: center;*/
+  display: inline-block;
+  color: #666;
+  background-color: #ddd;
+}
+
+.option.selected {
+  background-color: #DBD;
+  color: white;
+}
+
+.about {
+  margin-left: 20px;
+  width: 300px;
+  position: absolute;
+  top: 225px;
+  line-height: 20px;
+}
+.about p {
+  margin-bottom: 10px;
+}
+
+.social {
+  margin-top: 20px;
+}
