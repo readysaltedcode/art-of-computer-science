@@ -1,0 +1,31 @@
+<html>
+<body>
+
+  <svg>
+    <circle r="10"></circle>
+  </svg>
+
+  <script src="d3.v3.min.js"></script>
+  <script>
+
+  var circle = d3.select('circle');
+  var xScale = d3.scale.linear().domain([-3, 3]).range([0, 500]);
+  var yScale = d3.scale.linear().domain([-3, 3]).range([0, 500]);
+
+  function poll() {
+    d3.json('/api/data.json', function(err, json) {
+      var hipPos = json.Skeletons[0].Joints[0].Position;
+
+      circle
+        .attr('cx', xScale(hipPos.X))
+        .attr('cy', yScale(hipPos.Y));
+
+    });
+  }
+
+
+  // poll()
+  setInterval(poll, 10);
+ 
+</script>
+</body>
