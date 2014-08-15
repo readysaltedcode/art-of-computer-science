@@ -34,4 +34,4 @@ def update(i, step):
   t.start()
 
 
-update(0, 4)
+update(0, 2)

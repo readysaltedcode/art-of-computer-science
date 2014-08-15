@@ -1,0 +1,44 @@
+COMPUTATIONAL THINKING
+Abstraction/deconstruction/pattern recognition
+
+- deconstruction - start with complex vis, break into simpler pieces
+
+
+PROGRAMMING && OO
+Program flow/Variables & Operators/Loops/Functions/Input/Output
+
+- loops
+- in
+- out
+- functions
+
+
+
+TESTING & DEBUGGING
+Identifying a problem/Syntax errors
+
+Crashes
+Infinite loops
+
+Dance of the Reed Fairies
+
+
+- 
+
+
+
+
+DATA STRUCTURES & ALGORITHMS
+Linked lists, trees, queues, stacks, search, sort etc.
+
+
+BINARY & BOOLEAN LOGIC
+and/or/not
+101010100101011010
+
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+<html>
+<style>
+body {
+  background-color: black;
+}
+
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+</style>
+<body>
+  <div id="wrapper">
+    <canvas id="mycanvas" width="1200" height="800"></canvas>
+  </div>
+
+  <script src="../js/lodash.min.js"></script>
+  <script src="../js/d3.v3.min.js"></script>
+  <script src="../js/arrastre-util.js"></script>
+  <script>
+
+
+  // BIGDATA
+  // For a single skeleton, each joint position is represented with 3 points (one for each co-ordinate). Each joint has a unique colour.
+  // The value of each co-ordinate is mapped to the y-axis. The x-axis is random.
+
+  function poll() {
+    d3.json('/playbackServer/api/data.json', function(err, json) {
+      if(json === undefined) return;
+
+      var data = getDataOfSkeleton(json, 0);
+
+      ctx.fillStyle = "rgba(0, 0, 0, 0.02)";
+      ctx.fillRect(0, 0, width, height);
+ 
+      _.each(data, function(d, index) {
+        var x = Math.random() * width;
+        var y = scale(d) % height;
+        ctx.fillStyle = color(Math.floor(index / 3));
+        ctx.fillRect(x, y, 8, 8);
+      });
+    });
+  }
+
+  var width = 1200, height = 800;
+
+  var color = d3.scale.category20();
+  var scale = d3.scale.linear().domain([-3, 6]).range([1000, 0]);
+
+  var canvas = document.getElementById('mycanvas');
+  var ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = "rgb(0,0,0)";
+  ctx.fillRect(0, 0, width, height);
+
+  // poll()
+  setInterval(poll, 10);
+ 
+</script>
+</body>
