@@ -26,3 +26,42 @@ function getDataOfSkeleton(json, skeleton) {
   return data;
 }
 
+function getTrianglesOfSkeleton(json, skeleton) {
+  // Return array of triangles of single skeleton
+
+  // console.log(json);
+
+  // First construct lookup for joints
+  var joints = {};
+  _.each(json.Skeletons[skeleton].Joints, function(j) {
+    joints[j.JointType] = j.Position;
+  });
+
+  // console.log(joints);
+
+  var trianglePoints = [
+    ['ShoulderCenter', 'ShoulderLeft', 'ShoulderRight'],
+    ['ShoulderLeft', 'ShoulderRight', 'Spine'],
+    ['HipCenter', 'HipLeft', 'HipRight'],
+    ['KneeLeft', 'AnkleLeft', 'FootLeft'],
+    ['KneeRight', 'AnkleRight', 'FootRight'],
+    ['HandLeft', 'WristLeft', 'ElbowLeft'],
+    ['HandRight', 'WristRight', 'ElbowRight']
+  ];
+
+  var triangles = _.map(trianglePoints, function(points) {
+    var coords = _.map(points, function(p) {
+      return joints[p];
+    });
+    return coords;
+  });
+  // console.log(triangles);
+  return triangles;
+}
+
+// Drawing
+function drawCircle(ctx, x, y, r) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+  ctx.fill();
+}
