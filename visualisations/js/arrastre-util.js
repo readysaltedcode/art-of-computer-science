@@ -40,13 +40,17 @@ function getTrianglesOfSkeleton(json, skeleton) {
   // console.log(joints);
 
   var trianglePoints = [
-    ['ShoulderCenter', 'ShoulderLeft', 'ShoulderRight'],
+    // ['ShoulderCenter', 'ShoulderLeft', 'ShoulderRight'],
     ['ShoulderLeft', 'ShoulderRight', 'Spine'],
     ['HipCenter', 'HipLeft', 'HipRight'],
     ['KneeLeft', 'AnkleLeft', 'FootLeft'],
     ['KneeRight', 'AnkleRight', 'FootRight'],
     ['HandLeft', 'WristLeft', 'ElbowLeft'],
-    ['HandRight', 'WristRight', 'ElbowRight']
+    ['HandRight', 'WristRight', 'ElbowRight'],
+    ['HipLeft', 'HipRight', 'KneeLeft'],
+    ['HipLeft', 'HipRight', 'KneeRight'],
+    ['ShoulderCenter', 'ShoulderLeft', 'ElbowLeft'],
+    ['ShoulderCenter', 'ShoulderRight', 'ElbowRight']
   ];
 
   var triangles = _.map(trianglePoints, function(points) {
