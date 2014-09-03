@@ -18,8 +18,6 @@ The site will consist of videos, ‘recipes’, links to the curriculum UK and o
 Playground: 
 Why have we decided to call the hack and workshop events playgrounds? Because we want it to be open to everyone not just experts. Plus the opportunity to just mess around and tinkering with code and electronics! How more playful can you get.
 
-Why Data Visualisation? created by Peter Cook.
-
-Data and information are important parts of the new Computing Program of Study in England. By the use, modification and repurposing of large data sets. We are planning to use the D3 javascript library because of 2 reasons. 1 it is awesome and 2 we are collecting data from the dancers through out the process and want to be able to use that data in creating the visualisations. 
+Why Data Visualisation?Data and information are important parts of the new Computing Program of Study in England. By the use, modification and repurposing of large data sets. We are planning to use the D3 javascript library because of 2 reasons. 1 it is awesome and 2 we are collecting data from the dancers through out the process and want to be able to use that data in creating the visualisations. All data visualisation for the project have been created by Peter Cook.
 
 
