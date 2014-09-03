@@ -1,0 +1,71 @@
+<html>
+<style>
+</style>
+<body>
+
+  <canvas id="mycanvas" width="1000" height="800"></canvas>
+
+  <script src="lodash.min.js"></script>
+  <script src="d3.v3.min.js"></script>
+  <script>
+
+  var xScale = d3.scale.linear().domain([-2, 2]).range([0, 800]);
+  var yScale = d3.scale.linear().domain([-2, 2]).range([800, 0]);
+
+  function getAllJoints(json) {
+    var joints = [];
+    _.each(json.Skeletons, function(skeleton) {
+      _.each(skeleton.Joints, function(joint) {
+        joints.push(joint);
+      });
+    });
+    return joints;
+  }
+
+  function getJointsOfSkeleton(json, skeleton) {
+    var joints = [];
+    if(json.Skeletons === undefined)
+      return;
+    if(skeleton > json.Skeletons.length - 1)
+      return;
+    _.each(json.Skeletons[skeleton].Joints, function(joint) {
+      joints.push(joint);
+    });
+    return joints;
+  }
+
+
+  function poll() {
+    d3.json('/api/data.json', function(err, json) {
+      // console.log(json);
+
+      if(json === undefined) {
+        return;
+      }
+
+      var joints = getJointsOfSkeleton(json, 0);
+
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, 1000, 800);
+ 
+      ctx.fillStyle = "rgb(200,0,0)";
+
+      _.each(joints, function(j) {
+        ctx.fillRect (xScale(j.Position.X), yScale(j.Position.Y), 4, 4);
+      });
+    });
+  }
+
+
+
+  var canvas = document.getElementById('mycanvas');
+  var ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = "rgb(0,0,0)";
+  ctx.fillRect(0, 0, 1000, 800);
+
+  // poll()
+  setInterval(poll, 10);
+ 
+</script>
+</body>
