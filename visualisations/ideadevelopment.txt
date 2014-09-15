@@ -1,44 +1,62 @@
-COMPUTATIONAL THINKING
-Abstraction/deconstruction/pattern recognition
+1. BINARY & BOOLEAN LOGIC
+and/or/not
+101010100101011010
 
-- deconstruction - start with complex vis, break into simpler pieces
-
-
-PROGRAMMING && OO
-Program flow/Variables & Operators/Loops/Functions/Input/Output
-
-- loops
-- in
-- out
-- functions
+Ruthless Gravity - Craig Armstrong
+4:06
 
 
 
-TESTING & DEBUGGING
+2. TESTING & DEBUGGING
 Identifying a problem/Syntax errors
 
 Crashes
 Infinite loops
 
-Dance of the Reed Fairies
+Music is based around Dance of the Reed Flutes. Simple piano version echoing the mistakes in
+the music e.g. an infinite loop when the dancer is stuck in an infinite loop. On top of this we have 
+computer error noises. Needs to be manually queued from Ash's nod.
 
 
-- 
 
 
-
-
-DATA STRUCTURES & ALGORITHMS
+3. DATA STRUCTURES & ALGORITHMS
 Linked lists, trees, queues, stacks, search, sort etc.
 
+Voronoi?
 
-BINARY & BOOLEAN LOGIC
-and/or/not
-101010100101011010
-
-
+Nightbook - Ludovico Einaudi
+5:51
 
 
+
+
+
+
+4. BIG DATA
+This busy life
+3:54
+
+
+
+5. COMPUTATIONAL THINKING
+Abstraction/deconstruction/pattern recognition
+
+- deconstruction - start with complex vis, break into simpler pieces
+- small multiples?
+
+From Wikipedia:
+Analyzing and logically organizing data
+Data modeling, data abstractions, and simulations
+Formulating problems such that computers may assist
+Identifying, testing, and implementing possible solutions
+Automating solutions via algorithmic thinking
+Generalizing and applying this process to other problems
+
+Colouring of the joints... how do we colour the end joints etc.?
+
+MMU-14 Section 2 by John Hodian
+3:59
 
 
 
