@@ -1,0 +1,412 @@
+<html>
+<style>
+body {
+  background-color: black;
+}
+
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+</style>
+<body>
+  <div id="wrapper">
+    <canvas id="mycanvas" width="1200" height="800"></canvas>
+  </div>
+
+  <script src="../js/lodash.min.js"></script>
+  <script src="../js/d3.v3.min.js"></script>
+  <script src="../js/arrastre-util.js"></script>
+  <script>
+
+  var xScale = d3.scale.linear().domain([-1.2, 1.2]).range([0, 1000]);
+  var yScale = d3.scale.linear().domain([-0.4, 1.4]).range([1000, 0]);
+  var radiusScale = d3.scale.linear().domain([5, 0]).range([3, 24]);
+  var colorScale = d3.scale.linear().domain([0, 5]).range(['brown', 'yellow']);
+
+  var tree = {
+    name: 'Spine',
+    children: [
+      {
+        name: 'HipCenter',
+        children: [
+          {
+            name: 'HipLeft',
+            children: [
+              {
+                name: 'KneeLeft',
+                children: [
+                  {
+                    name: 'AnkleLeft',
+                    children: [
+                      {
+                        name: 'FootLeft'
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: 'HipRight',
+            children: [
+              {
+                name: 'KneeRight',
+                children: [
+                  {
+                    name: 'AnkleRight',
+                    children: [
+                      {
+                        name: 'FootRight'
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        name: 'ShoulderCenter',
+        children: [
+          {
+            name: 'Head'
+          },
+          {
+            name: 'ShoulderLeft',
+            children: [
+              {
+                name: 'ElbowLeft',
+                children: [
+                  {
+                    name: 'WristLeft',
+                    children: [
+                      {
+                        name: 'HandLeft'
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            name: 'ShoulderRight',
+            children: [
+              {
+                name: 'ElbowRight',
+                children: [
+                  {
+                    name: 'WristRight',
+                    children: [
+                      {
+                        name: 'HandRight'
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+
+  // var nodes = {
+  //   'Spine': {
+  //     depth: 0,
+  //     originalPos: {}
+  //   },
+  //   'HipCenter': {
+  //     depth: 1,
+  //     originalPos: {}
+  //   },
+  //   'ShoulderCenter': {
+  //     depth: 1,
+  //     originalPos: {}
+  //   },
+  //   'Head': {
+  //     depth: 2,
+  //     originalPos: {}
+  //   },
+  //   'ShoulderLeft': {
+  //     depth: 2,
+  //     originalPos: {}
+  //   },
+  //   'ElbowLeft': {
+  //     depth: 3,
+  //     originalPos: {}
+  //   },
+  //   'WristLeft': {
+  //     depth: 4,
+  //     originalPos: {}
+  //   },
+  //   'HandLeft': {
+  //     depth: 5,
+  //     originalPos: {}
+  //   },
+  //   'ShoulderRight': {
+  //     depth: 2,
+  //     originalPos: {}
+  //   },
+  //   'ElbowRight': {
+  //     depth: 3,
+  //     originalPos: {}
+  //   },
+  //   'WristRight': {
+  //     depth: 4,
+  //     originalPos: {}
+  //   },
+  //   'HandRight': {
+  //     depth: 5,
+  //     originalPos: {}
+  //   },
+  //   'HipLeft': {
+  //     depth: 2,
+  //     originalPos: {}
+  //   },
+  //   'KneeLeft': {
+  //     depth: 3,
+  //     originalPos: {}
+  //   },
+  //   'AnkleLeft': {
+  //     depth: 4,
+  //     originalPos: {}
+  //   },
+  //   'FootLeft': {
+  //     depth: 5,
+  //     originalPos: {}
+  //   },
+  //   'HipRight': {
+  //     depth: 2,
+  //     originalPos: {}
+  //   },
+  //   'KneeRight': {
+  //     depth: 3,
+  //     originalPos: {}
+  //   },
+  //   'AnkleRight': {
+  //     depth: 4,
+  //     originalPos: {}
+  //   },
+  //   'FootRight': {
+  //     depth: 5,
+  //     originalPos: {}
+  //   }
+  // };
+
+  // var links = [
+  //   ['Spine', 'ShoulderCenter'],
+  //   ['Spine', 'HipCenter'],
+
+  //   ['ShoulderCenter', 'Head'],
+
+  //   ['ShoulderCenter', 'ShoulderLeft'],
+  //   ['ShoulderLeft', 'ElbowLeft'],
+  //   ['ElbowLeft', 'WristLeft'],
+  //   ['WristLeft', 'HandLeft'],
+
+  //   ['ShoulderCenter', 'ShoulderRight'],
+  //   ['ShoulderRight', 'ElbowRight'],
+  //   ['ElbowRight', 'WristRight'],
+  //   ['WristRight', 'HandRight'],
+
+  //   ['HipCenter', 'HipLeft'],
+  //   ['HipLeft', 'KneeLeft'],
+  //   ['KneeLeft', 'AnkleLeft'],
+  //   ['AnkleLeft', 'FootLeft'],
+
+  //   ['HipCenter', 'HipRight'],
+  //   ['HipRight', 'KneeRight'],
+  //   ['KneeRight', 'AnkleRight'],
+  //   ['AnkleRight', 'FootRight']
+  // ];
+
+  function getJointsOfSkeleton(json, skeleton) {
+    var joints = {};
+    if(json.Skeletons === undefined)
+      return;
+    if(skeleton > json.Skeletons.length - 1)
+      return;
+    _.each(json.Skeletons[skeleton].Joints, function(joint) {
+      joints[joint.JointType] = joint;
+
+      nodes[joint.JointType].position = joint.Position;
+    });
+    return joints;
+  }
+
+  function makeTree() {
+    var treeLayout = d3.layout.tree()
+      .size([500, 500]);
+
+    treeNodes = treeLayout(tree);
+    treeLinks = treeLayout.links(treeNodes);
+
+    // console.log(treeNodes);
+    // console.log(treeLinks);
+
+  }
+
+
+  function drawTree() {
+      ctx.save();
+
+      ctx.strokeStyle = 'orange';
+      ctx.lineWidth = 0.5;
+
+      ctx.translate(300, 100);
+
+    _.each(treeLinks, function(link) {
+      console.log(link);
+      // var pos0 = link.source.x;
+      // var pos1 = nodes[link[1]].position;
+
+      drawLine(ctx, link.source.x, link.source.y, link.target.x, link.target.y);
+    });
+
+    _.each(treeNodes, function(node) {
+      // console.log(node);
+
+      // if(node.depth > nodeDepth)
+      //   return;
+
+      ctx.fillStyle = colorScale(node.depth);
+      // var x = xScale(node.position.X);
+      // var y = yScale(node.position.Y);
+      drawCircle(ctx, node.x, node.y, radiusScale(node.depth));
+      ctx.fillStyle = 'white';
+      ctx.textAlign = 'center';
+      ctx.fillText(node.name, node.x, node.y);
+    });
+
+
+    ctx.restore();
+
+  }
+
+  // function getStartPositions() {
+  //   var force = d3.layout.force()
+  //     .charge(-120)
+  //     .linkDistance(30)
+  //     .size([1000, 800]);
+
+  //   var i = 0;
+  //   var nodeArray = _.map(nodes, function(node, k) {
+  //     nodes[k].id = i++;
+  //     node.name = k;
+  //     return node;
+  //   });
+
+  //   var linkArray = _.map(links, function(link) {
+  //     return {source: nodes[link[0]].id, target: nodes[link[1]].id};
+  //   });
+
+  //   force
+  //     .nodes(nodeArray)
+  //     .links(linkArray)
+  //     .on("end", end)
+  //     .start();
+
+  //   function end(e) {
+  //     // console.log(nodes, nodeArray, linkArray);
+
+
+  //     ctx.strokeStyle = 'orange';
+  //     ctx.lineWidth = 0.5;
+  //     _.each(linkArray, function(link) {
+  //       // var pos0 = link.source.x;
+  //       // var pos1 = nodes[link[1]].position;
+
+  //       drawLine(ctx, link.source.x, link.source.y, link.target.x, link.target.y);
+  //     });
+
+  //     // _.each(nodes, function(node, k) {
+  //     //   // console.log(joint.JointType)
+  //     //   ctx.fillStyle = colorScale(node.depth);
+  //     //   var x = xScale(node.position.X);
+  //     //   var y = yScale(node.position.Y);
+  //     //   drawCircle(ctx, x, y, radiusScale(node.depth));
+  //     //   // ctx.fillText(k, x, y);
+  //     // });
+
+  //   }
+
+  // }
+
+  function poll() {
+    d3.json('/playbackServer/api/data.json', function(err, json) {
+      // console.log(json);
+      if(json === undefined) {
+        return;
+      }
+
+      // getStartPositions();
+
+      var joints = getJointsOfSkeleton(json, 0);
+      ctx.globalAlpha = 1;
+
+      // console.log(nodes)
+
+      clear();
+
+      ctx.strokeStyle = 'orange';
+      ctx.lineWidth = 0.5;
+      _.each(links, function(link) {
+        var node0 = nodes[link[0]];
+        var node1 = nodes[link[1]];
+
+        if(node0.depth > nodeDepth || node1.depth > nodeDepth)
+          return;
+
+        var pos0 = node0.position;
+        var pos1 = node1.position;
+
+        drawLine(ctx, xScale(pos0.X), yScale(pos0.Y), xScale(pos1.X), yScale(pos1.Y));
+      });
+
+      _.each(nodes, function(node, k) {
+        // console.log(joint.JointType)
+        if(node.depth > nodeDepth)
+          return;
+
+        ctx.fillStyle = colorScale(node.depth);
+        var x = xScale(node.position.X);
+        var y = yScale(node.position.Y);
+        drawCircle(ctx, x, y, radiusScale(node.depth));
+        // ctx.fillText(k, x, y);
+      });
+
+    });
+  }
+
+  function clear() {
+    // ctx.globalAlpha = 0.9;
+    ctx.fillStyle = "rgba(0,0,0,1)";
+    ctx.fillRect(0, 0, 1000, 800);
+  }
+
+  var canvas = document.getElementById('mycanvas');
+  var ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = "rgb(0,0,0)";
+  ctx.fillRect(0, 0, 1000, 800);
+
+  nodeDepth = 4;
+
+  var treeNodes, treeLinks;
+
+  makeTree();
+  drawTree();
+
+  // poll()
+  // setInterval(poll, 100);
+
+  // setInterval(clear, 60000);
+ 
+</script>
+</body>
