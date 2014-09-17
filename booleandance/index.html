@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Boolean Dance</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/chart.css">
+    <link href='http://fonts.googleapis.com/css?family=Monoton' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <h1>Boolean Dance</h1>
+    <div class="options"></div>
+
+    <div class="container">
+      <canvas id="c"></canvas>
+    </div>
+
+    <div class="about">
+      <p><strong>An animation of dance data</strong> created during an <a href="http://www.readysaltedcode.org/index.php/art-of-computer-science/">Art of Computer Science</a> hackday in which ways to visualise computer science concepts were explored.</p>
+      <p>The animation takes motion captured dance data and draws it according to rules from boolean algebra. For example, 'XOR circles' uses <a href="http://en.wikipedia.org/wiki/Exclusive_or">exclusive or</a> logic to draw parts of circles where an odd number of them intersect.</p>
+      <p>The <a href="https://github.com/readysaltedcode/art-of-computer-science">Art of Computer Science</a> project is devised and run by Genevieve Smith-Nunes of <a href="http://www.readysaltedcode.org/">readysaltedcode</a> and has received a <a href="https://www.google.com/edu/programs/google-rise-awards/#!award-recipients">Google RISE Award</a> and a <a href="http://www.artscouncil.org.uk/funding/grants-arts/">Grants for the Arts Award</a> (Arts Council England).</p>
+      <p>Many thanks to <a href="http://www.readysaltedcode.org/">readysaltedcode</a> and <a href="http://decoded.co/uk/">decoded</a> for running the hackday. Also to <a href="https://github.com/glastonbridge">Alex Shaw</a> for creating the motion capture data.</p>
+      <p>This animation built by <a href="http://prcweb.co.uk">Peter Cook</a> using JavaScript, Canvas &amp; bits of D3.</p>
+
+      <div class="social">
+        <a href="https://twitter.com/prcweb" class="twitter-follow-button" data-show-count="false">Follow @prcweb</a>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="http://prcweb.co.uk/lab/booleandance" data-text="Boolean Dance: dance data and boolean algebra #artofCS">Tweet</a>
+        <div class="fb-like" data-href="http://prcweb.co.uk/lab/booleandance" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false"></div>
+      </div>
+
+    </div>
+
+
+
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/requestanimframe.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Twitter -->
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <!-- Facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=220656758000337";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+  </body>
+</html>

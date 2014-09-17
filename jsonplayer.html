@@ -1,0 +1,40 @@
+<html><head><body>
+<h1>HydraTeeth</h1><p>combining JSON with lots of Skeletons since 2014 BC</p>
+<canvas width="1000" height="600" id="skeletonLand" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+var jsonEndpointAddress = "nerddance.json";
+
+var frames = [];
+var frameIndex = -1;
+
+function newFrame() {
+  if (++frameIndex >= frames.length) frameIndex = 0;
+  var data = frames[frameIndex];
+  
+  var canvas = $("#skeletonLand")[0].getContext("2d") ;
+  
+  canvas.fillStyle = "#000000";
+  canvas.fillRect(0,0,1000, 600);
+  $.each(data.Skeletons, function(index, skeleton) {
+    if (skeleton.TrackingState == 2) {
+       $.each(skeleton.Joints, function(index,joint) {
+            if (joint.JointType == "Head") canvas.fillStyle = "#FF8800";
+            else canvas.fillStyle = "#FFFFFF";
+            canvas.beginPath();
+            canvas.arc(400-100*joint.Position.X, 300-100*joint.Position.Y,10,0, 2* Math.PI, false);
+            canvas.fill();
+            //canvas.fillRect(400-100*joint.Position.X, 300-100*joint.Position.Y,10,10);
+       })
+    }
+  });
+};
+
+function loaded(data) {
+    frames = data;
+    window.setInterval(newFrame, 1000/30);
+}
+
+jQuery(document).ready(function($){$.getJSON(jsonEndpointAddress,loaded);});
+</script>
+</body></html>
