@@ -9,11 +9,21 @@ body {
   margin: 0 auto;
 }
 
+#info {
+  font-family: sans-serif;
+  position: absolute;
+  top: 0;
+  right: 50px;
+  color: white;
+}
+
 </style>
 <body>
   <div id="wrapper">
     <canvas id="mycanvas" width="1200" height="800"></canvas>
   </div>
+
+  <div id="info"></div>
 
   <script src="../js/lodash.min.js"></script>
   <script src="../js/d3.v3.min.js"></script>
@@ -31,14 +41,20 @@ body {
 
       var data = getDataOfSkeleton(json, 0);
 
+      ctx.globalAlpha = 1;
       ctx.fillStyle = "rgba(0, 0, 0, 0.02)";
       ctx.fillRect(0, 0, width, height);
  
+      var indexThreshold = indexScale(Date.now() - startTime);
+      // d3.select('#info').text(indexThreshold);
+
       _.each(data, function(d, index) {
+        if(index > indexThreshold)
+          return;
+
         var x = Math.random() * width;
         var y = scale(d) % height;
-        ctx.fillStyle = color(Math.floor(index / 3));
-        // ctx.fillRect(x, y, 8, 8);
+        ctx.fillStyle = color(index % 20);
         drawCircle(ctx, x, y, 5);
       });
     });
@@ -46,8 +62,11 @@ body {
 
   var width = 1200, height = 800;
 
-  var color = d3.scale.category20();
+  var startTime = Date.now();
+
+  var color = d3.scale.category20b();
   var scale = d3.scale.linear().domain([-3, 6]).range([1000, 0]);
+  var indexScale = d3.scale.threshold().domain([0, 54000, 70000, 84000, 120000, 154000, 167000, 200000, 230000]).range([0, 3, 10, 40, 10, 1, 60, 20, 10, 10]);
 
   var canvas = document.getElementById('mycanvas');
   var ctx = canvas.getContext('2d');
@@ -56,7 +75,7 @@ body {
   ctx.fillRect(0, 0, width, height);
 
   // poll()
-  setInterval(poll, 10);
+  setInterval(poll, 50);
  
 </script>
 </body>
