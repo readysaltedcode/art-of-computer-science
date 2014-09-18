@@ -29,25 +29,35 @@ body {
 
       var data = getDataOfSkeleton(json, 0);
       // console.log(data);
-      data = data.slice(0, 8);
+      // data = data.slice(0, 8);
 
       ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, width, height);
 
-      ctx.font = '15px sans-serif';
+      // ctx.font = '15px sans-serif';
 
-      var t = new Date().getTime();
+      var t = Date.now();
+
+      var threshold = numCirclesScale(t);
 
       _.each(data, function(d, index) {
+        // console.log(index);
+
+        if(index > threshold)
+          return;
 
         var drawAsBinary = Math.random() < chanceOfBinary(t);
         if(drawAsBinary) {
+
+          var fontSize = Math.random() * textScale(t) + 8;
+          ctx.font = 'bold ' + fontSize + 'px sans-serif';
 
           var binary = Math.round(scale(d)).toString(2);
           _.each(binary, function(bit) {
             var x = Math.random() * width;
             var y = Math.random() * height;
             ctx.fillStyle = bit === '1' ? 'red' : 'white';
+
             ctx.fillText(bit, x, y);
           });
         } else {
@@ -63,13 +73,16 @@ body {
 
 
   var width = 1200, height = 800;
-  var startTime = new Date().getTime();
+  var startTime = Date.now();
 
   // var color = d3.scale.category20();
   var color = d3.scale.linear().domain([-1, 0]).range(['white', 'red']);
   var scale = d3.scale.linear().domain([-3, 3]).range([0, 255]);
 
-  var chanceOfBinary = d3.scale.linear().domain([startTime + 10000, startTime + 60000]).range([0, 1]).clamp(true);
+  // Duration 4:06
+  var chanceOfBinary = d3.scale.linear().domain([startTime, startTime + 135000, startTime + 222000, startTime + 223000, startTime + 300000]).range([0, 0, 1, 1, 1]).clamp(true);
+  var numCirclesScale = d3.scale.linear().domain([startTime, startTime + 135000, startTime + 222000, startTime + 223000, startTime + 300000]).range([0, 0, 5, 0, 0]).clamp(true);
+  var textScale = d3.scale.linear().domain([startTime, startTime + 135000, startTime + 235000, startTime + 300000]).range([0, 0, 100, 100]).clamp(true);
 
   var canvas = document.getElementById('mycanvas');
   var ctx = canvas.getContext('2d');
@@ -77,6 +90,7 @@ body {
   ctx.fillStyle = "rgb(0,0,0)";
   ctx.fillRect(0, 0, width, height);
 
+  // poll();
   setInterval(poll, 50);
  
 </script>
