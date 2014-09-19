@@ -1,0 +1,63 @@
+<html>
+	<style>
+	</style>
+	<body>
+	
+		<canvas id="mycanvas" width="1000" height="800"></canvas>
+	
+	 	<script src=""></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="lodash.min.js"></script>
+		<script src="d3.v3.min.js"></script>
+		<script src="getdata.js"></script>
+	
+		<script language="javascript">
+
+var xScale = d3.scale.linear().domain([-2, 2]).range([0, 800]);
+var yScale = d3.scale.linear().domain([-2, 2]).range([800, 0]);
+
+function getAllJoints(json) {
+	var joints = [];
+	_.each(json.Skeletons, function(skeleton) {
+	  _.each(skeleton.Joints, function(joint) {
+	    joints.push(joint);
+	  });
+	});
+	return joints;
+}
+
+function getJointsOfSkeleton(frame, skeleton) {
+	var joints = [];
+	if(frame.Skeletons === undefined)
+		return [];
+	if(skeleton > frame.Skeletons.length - 1)
+		return [];
+	_.each(frame.Skeletons[skeleton].Joints, function(joint) {
+		joints.push(joint);
+	});
+	return joints;
+}
+
+var canvas = document.getElementById('mycanvas');
+var ctx = canvas.getContext('2d');
+
+ctx.fillStyle = "rgb(0,0,0)";
+ctx.fillRect(0, 0, 1000, 800);
+
+var dataFetcher = new ChunkedDataFetcher('http://brokenholmes.co.uk/misc/tacos/data_');
+dataFetcher.drawFunction = function(json) {
+	var joints = getJointsOfSkeleton(json, 0);
+		
+		ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+		ctx.fillRect(0, 0, 1000, 800);
+		
+		ctx.fillStyle = "rgb(200,0,0)";
+		
+		_.each(joints, function(j) {
+			ctx.fillRect (xScale(j.Position.X), yScale(j.Position.Y), 4, 4);
+	});
+}
+
+		</script>
+	</body>
+</html>
