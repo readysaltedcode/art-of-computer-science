@@ -26,7 +26,7 @@ body {
   // The value of each co-ordinate is mapped to the y-axis. The x-axis is random.
 
 
-  function poll1() {
+  function poll0() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -62,7 +62,7 @@ body {
     });
   }
 
-  function poll2() {
+  function poll1() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -99,7 +99,7 @@ body {
   }
 
 
-  function poll3() {
+  function poll2() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -132,7 +132,7 @@ body {
     });
   }
 
-  function poll4() {
+  function poll3() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -168,7 +168,7 @@ body {
   }
 
 
-  function poll5() {
+  function poll4() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -176,7 +176,7 @@ body {
 
       // console.log(triangles);
 
-      ctx.fillStyle = "rgba(0, 0, 0, 0.2)";   // 0.01 a nice setting
+      ctx.fillStyle = "rgba(0, 0, 0, 1)";
       ctx.fillRect(0, 0, width, height);
  
       _.each(triangles, function(triangle, index) {
@@ -219,15 +219,33 @@ body {
   ctx.fillRect(0, 0, width, height);
 
   // poll();
-  var pollFunction = poll1;
 
-  setTimeout(function() {pollFunction = poll2;}, 8000);
-  setTimeout(function() {pollFunction = poll3;}, 16000);
-  setTimeout(function() {pollFunction = poll4;}, 24000);
-  setTimeout(function() {pollFunction = poll4;}, 32000);
+  var mode = 0;
+  var pollFunctions = [poll0, poll1, poll2, poll3, poll4];
+  var pollFunction = pollFunctions[mode];
+
+  // setTimeout(function() {pollFunction = poll2;}, 8000);
+  // setTimeout(function() {pollFunction = poll3;}, 16000);
+  // setTimeout(function() {pollFunction = poll4;}, 24000);
+  // setTimeout(function() {pollFunction = poll4;}, 32000);
 
 
-  setInterval(function() {pollFunction();}, 10);
+  setInterval(function() {pollFunction();}, 50);
+
+  d3.select('body')
+    .on('keydown', function() {
+      var key = d3.event.keyCode;
+      // console.log(key);
+      if(key === 78) { /* m */
+        mode--;
+        if(mode < 0) mode = 0;
+      } else if (key === 77) { /* n */
+        mode++;
+        if(mode > 4) mode = 4;
+      };
+        pollFunction = pollFunctions[mode];
+      console.log(mode);
+    });
  
 </script>
 </body>
