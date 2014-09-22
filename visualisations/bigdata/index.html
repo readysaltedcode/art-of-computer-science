@@ -42,6 +42,7 @@ body {
       var data = getDataOfSkeleton(json, 0);
 
       ctx.globalAlpha = 1;
+      ctx.shadowBlur = 0;
       ctx.fillStyle = "rgba(0, 0, 0, 0.02)";
       ctx.fillRect(0, 0, width, height);
  
@@ -54,8 +55,23 @@ body {
 
         var x = Math.random() * width;
         var y = scale(d) % height;
-        ctx.fillStyle = color(index % 20);
-        drawCircle(ctx, x, y, 5);
+
+        var c = color(index % 10);
+
+        ctx.shadowColor = c;
+        ctx.shadowBlur = 10;
+
+        ctx.fillStyle = c;
+        drawCircle(ctx, x, y, 3);
+
+        ctx.save();
+        // ctx.translate(-600, -600);
+        // ctx.scale(4, 4);
+        ctx.globalAlpha = 0.02;
+        if(Math.random() > 0.9)
+          drawCircle(ctx, x, y, 100 + Math.random() * 100);
+        ctx.restore();
+
       });
     });
   }
@@ -66,7 +82,7 @@ body {
 
   var color = d3.scale.category20b();
   var scale = d3.scale.linear().domain([-3, 6]).range([1000, 0]);
-  var indexScale = d3.scale.threshold().domain([0, 54000, 70000, 84000, 120000, 154000, 167000, 200000, 230000]).range([0, 3, 10, 40, 10, 1, 60, 20, 10, 10]);
+  var indexScale = d3.scale.threshold().domain([0, 53000, 70000, 84000, 120000, 153000, 167000, 200000, 230000]).range([0, 0, 4, 40, 10, 1, 60, 20, 10, 0]);
 
   var canvas = document.getElementById('mycanvas');
   var ctx = canvas.getContext('2d');

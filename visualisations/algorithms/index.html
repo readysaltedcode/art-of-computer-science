@@ -22,10 +22,11 @@ body {
 
   var xScale = d3.scale.linear().domain([-1.7, 1.7]).range([0, 800]);
   var yScale = d3.scale.linear().domain([-1.7, 1.7]).range([800, 0]);
-  var radiusScale = d3.scale.linear().domain([5, 0]).range([3, 16]);
+
+  var radiusScale = d3.scale.linear().domain([5, 0]).range([8, 30]);
   var colorScale = d3.scale.linear().domain([0, 5]).range(['brown', 'yellow']);
 
-  var interpolationScale = d3.scale.linear().domain([0, 205000, 330000]).range([1, 1, 0.02]).clamp(true);
+  var interpolationScale = d3.scale.linear().domain([0, 105000, 330000]).range([0.01, 0.01, 1]).clamp(true);
   var depthScale = d3.scale.linear().domain([0, 31000, 47000, 62000, 77000, 94000]).range([0, 1, 2, 3, 4, 5]).clamp(true);
   var alphaScale = d3.scale.linear().domain([0, 330000]).range([0.01, 0.2]).clamp(true);
   var linkAlphaScale = d3.scale.linear().domain([0, 330000]).range([0, 1]).clamp(true);
@@ -138,15 +139,15 @@ body {
 
   function initialiseTree() {
     var treeLayout = d3.layout.tree()
-      .size([500, 500]);
+      .size([0.6 * Math.PI, 500]);
 
     var treeNodesArray = treeLayout(tree);
     var treeLinksArray = treeLayout.links(treeNodesArray);
 
     // keep tabs on original positions
     treeNodesArray = _.map(treeNodesArray, function(node) {
-      node.startX = node.x,
-      node.startY = node.y
+      node.startX = node.y * Math.sin(node.x - 0.3 * Math.PI);
+      node.startY = -(node.y * Math.cos(node.x - 0.3 * Math.PI) - 350);
       return node;
     });
 
@@ -161,14 +162,23 @@ body {
     // console.log(treeLinksArray);
   }
 
+  function drawAdditionalBackground() {
+    if(Math.random() > 0.92) {
+      ctx.fillStyle = 'brown';
+      ctx.globalAlpha = 0.15;
+      drawCircle(ctx, 1200 * Math.random(), 800 * Math.random(), 100 + 300 * Math.random());
+    }
+  }
 
   function drawTree() {
     ctx.save();
 
     ctx.strokeStyle = 'orange';
+    ctx.shadowColor = 'orange';
     ctx.lineWidth = 0.5;
+    ctx.shadowBlur = 20;
 
-    ctx.translate(300, 100);
+    ctx.translate(600, 300);
 
     ctx.globalAlpha = linkAlphaScale(Date.now() - startTime);
 
@@ -190,11 +200,11 @@ body {
       if(node.depth > depth)
         return;
 
+      ctx.shadowColor = colorScale(node.depth);
+      ctx.shadowBlur = 20;
+
       ctx.fillStyle = colorScale(node.depth);
       drawCircle(ctx, node.x, node.y, radiusScale(node.depth));
-      // ctx.fillStyle = 'white';
-      // ctx.textAlign = 'center';
-      // ctx.fillText(node.name, node.x, node.y);
     });
 
     ctx.restore();
@@ -243,6 +253,10 @@ body {
 
       clear();
 
+
+      drawBackground();
+      drawAdditionalBackground();
+      
       updateNodes(joints);
       drawTree();
 
@@ -267,11 +281,7 @@ body {
   var depth = 0;
 
   initialiseTree();
-  drawTree();
-
-
-
-  // updateNodes();
+  // drawTree();
 
   // poll()
   setInterval(poll, 100);

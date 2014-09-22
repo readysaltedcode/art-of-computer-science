@@ -6,6 +6,20 @@ Ruthless Gravity - Craig Armstrong
 4:06
 
 
+Evolution of numbers represented by colour (0..255) into binary...
+
+
+CHANGES
+When music quietens down... back to points
+
+
+
+In computing, colour is typically represented by numbers between 0 and 255 which translates into 8 binary digits (1's and 0's). This visualisation represents each joint of a dancer by a dot coloured according to its position and as time progresses, the positions are converted into binary digits. 
+
+
+
+
+
 
 2. TESTING & DEBUGGING
 Identifying a problem/Syntax errors
@@ -20,6 +34,19 @@ computer error noises. Needs to be manually queued from Ash's nod.
 
 
 
+Evolution of a visualisation, fixing problems along the way
+
+
+CHANGES
+blanks between phases
+
+
+
+
+The visualisation conveys the process of e
+
+
+
 3. DATA STRUCTURES & ALGORITHMS
 Linked lists, trees, queues, stacks, search, sort etc.
 
@@ -30,12 +57,18 @@ Nightbook - Ludovico Einaudi
 
 
 
-
+CHANGES
+Start with tree - evolve to dancer
+Radial tree
+More movement earlier on
 
 
 4. BIG DATA
 This busy life
 3:54
+
+
+Visualisation to convey just how much data is being output by the kinect
 
 
 
@@ -54,6 +87,12 @@ Automating solutions via algorithmic thinking
 Generalizing and applying this process to other problems
 
 Colouring of the joints... how do we colour the end joints etc.?
+
+Problem to be solved: what is the shape of the dance? Where are the joints most often placed over the course of time? How can we visualise this?
+
+
+
+
 
 MMU-14 Section 2 by John Hodian
 3:59
