@@ -78,7 +78,7 @@ function drawLine(ctx, x0, y0, x1, y1) {
 }
 
 function drawBackground() {
-  for(var i=0; i < 8; i++) {
+  for(var i=0; i < 2; i++) {
     ctx.fillStyle = 'white';
     ctx.globalAlpha = Math.random();
     drawCircle(ctx, 1200 * Math.random(), 800 * Math.random(), 2 * Math.random());

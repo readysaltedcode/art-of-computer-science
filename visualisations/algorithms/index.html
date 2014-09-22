@@ -20,14 +20,14 @@ body {
   <script src="../js/arrastre-util.js"></script>
   <script>
 
-  var xScale = d3.scale.linear().domain([-1.7, 1.7]).range([0, 800]);
-  var yScale = d3.scale.linear().domain([-1.7, 1.7]).range([800, 0]);
+  var xScale = d3.scale.linear().domain([-0.3, 1.7]).range([0, 800]);
+  var yScale = d3.scale.linear().domain([-1.5, 0.5]).range([800, 0]);
 
   var radiusScale = d3.scale.linear().domain([5, 0]).range([8, 30]);
   var colorScale = d3.scale.linear().domain([0, 5]).range(['brown', 'yellow']);
 
-  var interpolationScale = d3.scale.linear().domain([0, 105000, 330000]).range([0.01, 0.01, 1]).clamp(true);
-  var depthScale = d3.scale.linear().domain([0, 31000, 47000, 62000, 77000, 94000]).range([0, 1, 2, 3, 4, 5]).clamp(true);
+  var interpolationScale = d3.scale.linear().domain([0, 32000, 156000, 200000, 330000]).range([0, 0, 0.1, 1, 1]).clamp(true);
+  var depthScale = d3.scale.linear().domain([0, 16000, 20000, 32000, 46000, 62000, 77000]).range([-1, 0, 1, 2, 3, 4, 5]).clamp(true);
   var alphaScale = d3.scale.linear().domain([0, 330000]).range([0.01, 0.2]).clamp(true);
   var linkAlphaScale = d3.scale.linear().domain([0, 330000]).range([0, 1]).clamp(true);
 
@@ -147,7 +147,7 @@ body {
     // keep tabs on original positions
     treeNodesArray = _.map(treeNodesArray, function(node) {
       node.startX = node.y * Math.sin(node.x - 0.3 * Math.PI);
-      node.startY = -(node.y * Math.cos(node.x - 0.3 * Math.PI) - 350);
+      node.startY = -(node.y * Math.cos(node.x - 0.3 * Math.PI) - 450);
       return node;
     });
 
@@ -163,10 +163,14 @@ body {
   }
 
   function drawAdditionalBackground() {
-    if(Math.random() > 0.92) {
+    if(Math.random() > 0.96) {
       ctx.fillStyle = 'brown';
+      ctx.shadowColor = 'brown';
+      ctx.shadowBlur = 40;
       ctx.globalAlpha = 0.15;
       drawCircle(ctx, 1200 * Math.random(), 800 * Math.random(), 100 + 300 * Math.random());
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
     }
   }
 
@@ -255,7 +259,7 @@ body {
 
 
       drawBackground();
-      drawAdditionalBackground();
+      // drawAdditionalBackground();
       
       updateNodes(joints);
       drawTree();
@@ -284,7 +288,7 @@ body {
   // drawTree();
 
   // poll()
-  setInterval(poll, 100);
+  setInterval(poll, 50);
 
   // setInterval(clear, 60000);
  

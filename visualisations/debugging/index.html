@@ -21,12 +21,14 @@ body {
   <script>
 
 
-  // BIGDATA
-  // For a single skeleton, each joint position is represented with 3 points (one for each co-ordinate). Each joint has a unique colour.
-  // The value of each co-ordinate is mapped to the y-axis. The x-axis is random.
-
-
   function poll0() {
+    // Just clear the canvas
+    ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+    ctx.fillRect(0, 0, width, height);
+  }
+
+
+  function poll1() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -62,7 +64,7 @@ body {
     });
   }
 
-  function poll1() {
+  function poll2() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -99,7 +101,7 @@ body {
   }
 
 
-  function poll2() {
+  function poll3() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -132,7 +134,7 @@ body {
     });
   }
 
-  function poll3() {
+  function poll4() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -168,7 +170,7 @@ body {
   }
 
 
-  function poll4() {
+  function poll5() {
     d3.json('/playbackServer/api/data.json', function(err, json) {
       if(json === undefined) return;
 
@@ -204,8 +206,6 @@ body {
   }
 
 
-  // Function to call the appropriate poll function
-
   var width = 1200, height = 800;
 
   var color = d3.scale.category20();
@@ -221,14 +221,8 @@ body {
   // poll();
 
   var mode = 0;
-  var pollFunctions = [poll0, poll1, poll2, poll3, poll4];
+  var pollFunctions = [poll0, poll1, poll0, poll1, poll0, poll2, poll0, poll3, poll0, poll4, poll0, poll5, poll0];
   var pollFunction = pollFunctions[mode];
-
-  // setTimeout(function() {pollFunction = poll2;}, 8000);
-  // setTimeout(function() {pollFunction = poll3;}, 16000);
-  // setTimeout(function() {pollFunction = poll4;}, 24000);
-  // setTimeout(function() {pollFunction = poll4;}, 32000);
-
 
   setInterval(function() {pollFunction();}, 50);
 
@@ -241,10 +235,9 @@ body {
         if(mode < 0) mode = 0;
       } else if (key === 77) { /* n */
         mode++;
-        if(mode > 4) mode = 4;
+        if(mode >= pollFunctions.length) mode = pollFunctions.length - 1;
       };
         pollFunction = pollFunctions[mode];
-      console.log(mode);
     });
  
 </script>
