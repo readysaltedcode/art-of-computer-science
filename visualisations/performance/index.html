@@ -1,0 +1,49 @@
+<html>
+<style>
+body {
+  background-color: black;
+}
+
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+</style>
+<body>
+  <div id="wrapper">
+    <canvas id="mycanvas" width="1200" height="800"></canvas>
+  </div>
+
+  <script src="../js/lodash.min.js"></script>
+  <script src="../js/d3.v3.min.js"></script>
+  <script src="../js/arrastre-util.js"></script>
+  <script src="../js/datamanager.js"></script>
+  <script src="../js/framemanager.js"></script>
+
+  <script src="../js/vis/computational.js"></script>
+  <script src="../js/vis/debugging1.js"></script>
+  <script>
+
+
+function tick() {
+  arrastre.frameManager.updateFrame();
+
+  // console.log(arrastre.frameManager.currentFrameNum);
+
+  arrastre.vis.debugging1.render();
+}
+
+
+
+arrastre.dataManager.load('../data/temp.json');
+arrastre.frameManager.reset();
+
+
+
+setInterval(tick, 50);
+
+  // load();
+ 
+</script>
+</body>
