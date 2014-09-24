@@ -22,6 +22,8 @@ arrastre.vis.debugging5 = (function(){
     var frame = arrastre.frameManager.currentFrame;
     if(!frame) return;
 
+    // console.log(frame);
+
     var triangles = getTrianglesOfSkeleton(frame, 0);
 
     ctx.fillStyle = "rgba(0, 0, 0, 1)";

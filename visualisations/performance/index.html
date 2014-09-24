@@ -9,10 +9,17 @@ body {
   margin: 0 auto;
 }
 
+#info {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: white;
+}
 </style>
 <body>
   <div id="wrapper">
     <canvas id="mycanvas" width="1200" height="800"></canvas>
+    <div id="info"></div>
   </div>
 
   <script src="js/lodash.min.js"></script>
@@ -51,47 +58,47 @@ setInterval(tick, 50);
 document.addEventListener('keydown', function(event) {
     if(event.keyCode == 49) { //1
       selectedVis = 'bigdata';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/computational.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 50) { //2
       selectedVis = 'debugging1';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/debugging1.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 51) { //3
       selectedVis = 'debugging2';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/debugging2.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 52) { //4
       selectedVis = 'debugging3';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/debugging3.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 53) { //5
       selectedVis = 'debugging4';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/debugging4.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 54) { //6
       selectedVis = 'debugging5';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/debugging5.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 55) { //7
       selectedVis = 'algorithms';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/algorithms.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 56) { //8
       selectedVis = 'boolean';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/computational.json');
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 57) { //9
       selectedVis = 'computational';
-      arrastre.dataManager.load('data/temp.json');
+      arrastre.dataManager.load('data/computational.json');
       arrastre.frameManager.reset();
     }
     else if(event.keyCode == 65) { //a
