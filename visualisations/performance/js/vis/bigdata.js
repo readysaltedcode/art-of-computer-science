@@ -36,7 +36,7 @@ arrastre.vis.bigdata = (function(){
       // var indexThreshold = indexScale(Date.now() - startTime);
       var ts = arrastre.frameManager.ts;
       var indexThreshold = indexScale(ts);
-      // d3.select('#info').text(indexThreshold);
+      d3.select('#info').text(ts + ': ' + indexThreshold);
 
       _.each(data, function(d, index) {
         if(index > indexThreshold)

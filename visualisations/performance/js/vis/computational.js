@@ -5,7 +5,7 @@ arrastre.vis = arrastre.vis || {};
 arrastre.vis.computational = (function(){
   var my = {};
 
-  var xScale = d3.scale.linear().domain([-1, 1]).range([0, 1000]);
+  var xScale = d3.scale.linear().domain([-1.8, 0.2]).range([0, 1000]);
   var yScale = d3.scale.linear().domain([-0.2, 1.2]).range([1000, 0]);
 
   var canvas = document.getElementById('mycanvas');

@@ -3,14 +3,14 @@
 import json
 
 
-f = open('../playbackServer/data/3.json')
+f = open('../../../captures-24-9-14/debugging/5.json')
 data = json.load(f)
 f.close()
 
 numSamples = len(data)
 # print numSamples
 
-out = open('big.json', 'w', 0)
+out = open('debugging5.json', 'w', 0)
 
 extendedData = []
 
@@ -45,7 +45,7 @@ roundPositions()
 appendData(0)
 
 # lastts = extendedData[len(extendedData) - 1]['TimeStamp'] + 30
-for i in range(0, 8):
+for i in range(0, 0):
   appendData(latestts())
 
 
