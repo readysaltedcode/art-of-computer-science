@@ -58,9 +58,8 @@ Nightbook - Ludovico Einaudi
 
 
 CHANGES
-Start with tree - evolve to dancer
-Radial tree
 More movement earlier on
+Full movement earlier on - at least a minute
 
 
 4. BIG DATA
