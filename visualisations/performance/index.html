@@ -22,9 +22,14 @@ body {
   <script src="js/framemanager.js"></script>
 
   <script src="js/vis/bigdata.js"></script>
-  <!-- // <script src="js/vis/algorithms.js"></script> -->
-  <script src="js/vis/computational.js"></script>
   <script src="js/vis/debugging1.js"></script>
+  <script src="js/vis/debugging2.js"></script>
+  <script src="js/vis/debugging3.js"></script>
+  <script src="js/vis/debugging4.js"></script>
+  <script src="js/vis/debugging5.js"></script>
+  <script src="js/vis/algorithms.js"></script>
+  <script src="js/vis/boolean.js"></script>
+  <script src="js/vis/computational.js"></script>
   <script>
 
 var selectedVis = null;
@@ -50,20 +55,42 @@ document.addEventListener('keydown', function(event) {
       arrastre.frameManager.reset();
     }
     if(event.keyCode == 50) { //2
-      // selectedVis = 'algorithms';
-      // arrastre.dataManager.load('data/temp.json');
-      // arrastre.frameManager.reset();
-    }
-    if(event.keyCode == 51) { //3
-        // myPoller.pollFunction = new BooleanVis(canvas);
-    }
-    if(event.keyCode == 52) { //4
-      selectedVis = 'computational';
+      selectedVis = 'debugging1';
       arrastre.dataManager.load('data/temp.json');
       arrastre.frameManager.reset();
     }
-    if(event.keyCode == 53) { //4
-      selectedVis = 'debugging1';
+    if(event.keyCode == 51) { //3
+      selectedVis = 'debugging2';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 52) { //4
+      selectedVis = 'debugging3';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 53) { //5
+      selectedVis = 'debugging4';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 54) { //6
+      selectedVis = 'debugging5';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 55) { //7
+      selectedVis = 'algorithms';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 56) { //8
+      selectedVis = 'boolean';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 57) { //9
+      selectedVis = 'computational';
       arrastre.dataManager.load('data/temp.json');
       arrastre.frameManager.reset();
     }

@@ -77,7 +77,7 @@ function drawLine(ctx, x0, y0, x1, y1) {
   ctx.stroke();
 }
 
-function drawBackground() {
+function drawBackground(ctx) {
   for(var i=0; i < 2; i++) {
     ctx.fillStyle = 'white';
     ctx.globalAlpha = Math.random();
