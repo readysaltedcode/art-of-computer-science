@@ -2,7 +2,7 @@
 var arrastre = arrastre || {};
 arrastre.vis = arrastre.vis || {};
 
-arrastre.vis.bigdata = (function(){
+arrastre.vis.algorithms = (function(){
   var my = {};
 
 
@@ -24,11 +24,8 @@ arrastre.vis.bigdata = (function(){
   ctx.fillRect(0, 0, 1200, 800);
 
   var treeNodes, treeLinks;
-  var startTime = Date.now();
+  // var startTime = Date.now();
   var depth = 0;
-
-  initialiseTree();
-
 
   var tree = {
     name: 'Spine',
@@ -121,6 +118,7 @@ arrastre.vis.bigdata = (function(){
     ]
   };
 
+
   function getJointsOfSkeleton(json, skeleton) {
     // Transform Kinect data into object
     var joints = {};
@@ -139,7 +137,9 @@ arrastre.vis.bigdata = (function(){
     var treeLayout = d3.layout.tree()
       .size([0.6 * Math.PI, 500]);
 
+      // console.log(tree);
     var treeNodesArray = treeLayout(tree);
+
     var treeLinksArray = treeLayout.links(treeNodesArray);
 
     // keep tabs on original positions
@@ -182,7 +182,7 @@ arrastre.vis.bigdata = (function(){
 
     ctx.translate(600, 300);
 
-    ctx.globalAlpha = linkAlphaScale(Date.now() - startTime);
+    ctx.globalAlpha = linkAlphaScale(arrastre.frameManager.ts);
 
     _.each(treeLinks, function(link) {
       var node0 = treeNodes[link.source.name];
@@ -226,7 +226,7 @@ arrastre.vis.bigdata = (function(){
 
       // console.log(joint, node);
 
-      var u = interpolationScale(Date.now() - startTime);
+      var u = interpolationScale(arrastre.frameManager.ts);
       node.x = linearInterpolate(node.startX, xScale(joint.Position.X), u);
       node.y = linearInterpolate(node.startY, yScale(joint.Position.Y), u);
     });
@@ -236,12 +236,10 @@ arrastre.vis.bigdata = (function(){
 
   function clear() {
     // ctx.globalAlpha = 0.9;
-    var alpha = alphaScale(Date.now() - startTime);
+    var alpha = alphaScale(arrastre.frameManager.ts);
     ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     ctx.fillRect(0, 0, 1200, 800);
   }
-
-
 
   my.render = function() {
 
@@ -263,14 +261,15 @@ arrastre.vis.bigdata = (function(){
       // console.log(joints)
 
       clear();
-
-
-      drawBackground();
+      drawBackground(ctx);
       // drawAdditionalBackground();
       
       updateNodes(joints);
       drawTree();
   }
+
+
+  initialiseTree();
 
   return my;
 }());
