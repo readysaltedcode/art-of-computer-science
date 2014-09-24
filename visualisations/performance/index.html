@@ -1,0 +1,78 @@
+<html>
+<style>
+body {
+  background-color: black;
+}
+
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+</style>
+<body>
+  <div id="wrapper">
+    <canvas id="mycanvas" width="1200" height="800"></canvas>
+  </div>
+
+  <script src="js/lodash.min.js"></script>
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/arrastre-util.js"></script>
+  <script src="js/datamanager.js"></script>
+  <script src="js/framemanager.js"></script>
+
+  <script src="js/vis/bigdata.js"></script>
+  <!-- // <script src="js/vis/algorithms.js"></script> -->
+  <script src="js/vis/computational.js"></script>
+  <script src="js/vis/debugging1.js"></script>
+  <script>
+
+var selectedVis = null;
+
+function tick() {
+  if(!selectedVis)
+    return;
+
+  arrastre.frameManager.updateFrame();
+  arrastre.vis[selectedVis].render();
+
+  // console.log(arrastre.frameManager.ts)
+}
+
+// setInterval(tick, 1000);
+setInterval(tick, 50);
+
+// Keyboard events
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 49) { //1
+      selectedVis = 'bigdata';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 50) { //2
+      // selectedVis = 'algorithms';
+      // arrastre.dataManager.load('data/temp.json');
+      // arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 51) { //3
+        // myPoller.pollFunction = new BooleanVis(canvas);
+    }
+    if(event.keyCode == 52) { //4
+      selectedVis = 'computational';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    if(event.keyCode == 53) { //4
+      selectedVis = 'debugging1';
+      arrastre.dataManager.load('data/temp.json');
+      arrastre.frameManager.reset();
+    }
+    else if(event.keyCode == 65) { //a
+        // myPoller.pollFunction = myFadeOut;
+    }
+});
+
+  // load();
+ 
+</script>
+</body>

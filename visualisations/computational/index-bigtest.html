@@ -1,0 +1,111 @@
+<html>
+<style>
+body {
+  background-color: black;
+}
+
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+</style>
+<body>
+  <div id="wrapper">
+    <canvas id="mycanvas" width="1200" height="800"></canvas>
+  </div>
+
+  <script src="../js/lodash.min.js"></script>
+  <script src="../js/d3.v3.min.js"></script>
+  <script src="../js/arrastre-util.js"></script>
+  <script>
+
+  var xScale = d3.scale.linear().domain([-1, 1]).range([0, 1000]);
+  var yScale = d3.scale.linear().domain([-0.2, 1.2]).range([1000, 0]);
+
+  var colors = {
+    HipCenter : '#ff7f0e',
+    Spine : '#ff7f0e',
+    ShoulderCenter : '#ff7f0e',
+    Head : '#e7cb94',
+    ShoulderLeft : '#bd9e39',
+    ElbowLeft : '#bd9e39',
+    WristLeft : '#bd9e39',
+    HandLeft : '#e7cb94',
+    ShoulderRight : '#bd9e39',
+    ElbowRight : '#bd9e39',
+    WristRight : '#bd9e39',
+    HandRight : '#e7cb94',
+    HipLeft : '#bd9e39',
+    KneeLeft : '#bd9e39',
+    AnkleLeft : '#bd9e39',
+    FootLeft : '#e7cb94',
+    HipRight : '#bd9e39',
+    KneeRight : '#bd9e39',
+    AnkleRight : '#bd9e39',
+    FootRight : '#e7cb94'
+  }
+
+
+  function load() {
+    d3.json('big.json', function(err, json) {
+      // console.log(json);
+      frameData = json;
+      setInterval(poll, 50);
+    });
+  }
+
+  function testload(i) {
+    d3.json('big.json', function(err, json) {
+      // console.log(json);
+      frameData[i] = json;
+      // setInterval(poll, 50);
+    });
+  }
+
+
+  function getFrame() {
+    var numFrames = frameData.length;
+    var ts = Date.now() - startTs;
+
+    for(var i = currentFrameNum + 1; i < numFrames; i++) {
+      if(frameData[i].TimeStamp > ts) {
+        currentFrame =  frameData[i-1];
+        currentFrameNum = i-1;
+        return;
+      }
+    }
+
+    // End of data: do nothing
+    return;
+  }
+
+  function poll() {
+    getFrame();
+
+    // console.log(currentFrameNum);
+
+    ctx.globalAlpha = 0.1;
+
+    _.each(currentFrame.Skeletons[0].Joints, function(joint, i) {
+      ctx.fillStyle = colors[joint.JointType];
+      drawCircle(ctx, xScale(joint.Position.X), yScale(joint.Position.Y), 3);
+    });
+  }
+
+  var startTs = Date.now();
+
+  var frameData = [];
+  var currentFrame = {};
+  var currentFrameNum = 0;
+
+  var canvas = document.getElementById('mycanvas');
+  var ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = "rgb(0,0,0)";
+  ctx.fillRect(0, 0, 1200, 800);
+
+  // load();
+ 
+</script>
+</body>
