@@ -34,7 +34,7 @@ arrastre.vis.computational = (function(){
   }
 
   my.render = function() {
-    ctx.globalAlpha = 0.15;
+    ctx.globalAlpha = 0.18;
 
     var frame = arrastre.frameManager.currentFrame;
     if(!frame)

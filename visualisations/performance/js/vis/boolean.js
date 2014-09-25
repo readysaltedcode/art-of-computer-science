@@ -10,8 +10,8 @@ arrastre.vis.boolean = (function(){
   var color = d3.scale.linear().domain([-1, 0]).range(['white', 'blue']);
   var scale = d3.scale.linear().domain([-3, 3]).range([0, 255]);
 
-  var chanceOfBinary = d3.scale.linear().domain([0, 135000, 222000, 223000, 300000]).range([0, 0, 0.6, 0, 0]).clamp(true);
-  var numCirclesScale = d3.scale.linear().domain([0, 135000, 222000, 223000, 300000]).range([0, 0, 4, 0, 0]).clamp(true);
+  var chanceOfBinary = d3.scale.linear().domain([0, 135000, 220000, 221000, 300000]).range([0, 0, 0.6, 0, 0]).clamp(true);
+  var numCirclesScale = d3.scale.linear().domain([0, 135000, 220000, 221000, 300000]).range([0, 0, 4, 0, 0]).clamp(true);
 
   var ctx = arrastre.canvas.ctx;
 
@@ -35,7 +35,7 @@ arrastre.vis.boolean = (function(){
 
       var drawAsBinary = Math.random() < chanceOfBinary(ts);
       if(drawAsBinary) {
-        var fontSize = 18;
+        var fontSize = 16;
         ctx.font = 'bold ' + fontSize + 'px sans-serif';
 
         var binary = Math.round(scale(d)).toString(2);
