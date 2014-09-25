@@ -8,24 +8,21 @@ arrastre.vis.debugging3 = (function(){
   var width = 1200, height = 800;
 
   var color = d3.scale.category20();
-  var xScale = d3.scale.linear().domain([-1.5, 1.5]).range([0, width]);
-  var yScale = d3.scale.linear().domain([-1.5, 1.5]).range([height, 0]);
+  var xScale = d3.scale.linear().domain([-1, 1]).range([0, width]);
+  var yScale = d3.scale.linear().domain([-0.5, 1.5]).range([height, 0]);
 
-  var canvas = document.getElementById('mycanvas');
-  var ctx = canvas.getContext('2d');
-
-  ctx.fillStyle = "rgb(0,0,0)";
-  ctx.fillRect(0, 0, width, height);
+  var ctx = arrastre.canvas.ctx;
 
   my.render = function() {
 
     var frame = arrastre.frameManager.currentFrame;
     if(!frame) return;
 
-    var triangles = getTrianglesOfSkeleton(frame, 0);
+    var triangles = arrastre.util.getTrianglesOfSkeleton(frame, 0);
 
     ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
     ctx.fillRect(0, 0, width, height);
+    ctx.globalAlpha = 0.4;
 
     ctx.fillStyle = '#aec7e8';
 
@@ -46,7 +43,7 @@ arrastre.vis.debugging3 = (function(){
 
       var x = xScale(j.Position.X);
       var y = yScale(j.Position.Y);
-      drawCircle(ctx, x, y, 18);
+      arrastre.canvas.drawCircle(x, y, 18);
     });
 
     }

@@ -5,7 +5,6 @@ arrastre.vis = arrastre.vis || {};
 arrastre.vis.algorithms = (function(){
   var my = {};
 
-
   var xScale = d3.scale.linear().domain([-0.3, 1.7]).range([0, 800]);
   var yScale = d3.scale.linear().domain([-1.5, 0.5]).range([800, 0]);
 
@@ -17,11 +16,7 @@ arrastre.vis.algorithms = (function(){
   var alphaScale = d3.scale.linear().domain([0, 330000]).range([0.01, 0.2]).clamp(true);
   var linkAlphaScale = d3.scale.linear().domain([0, 330000]).range([0, 1]).clamp(true);
 
-  var canvas = document.getElementById('mycanvas');
-  var ctx = canvas.getContext('2d');
-
-  ctx.fillStyle = "rgb(0,0,0)";
-  ctx.fillRect(0, 0, 1200, 800);
+  var ctx = arrastre.canvas.ctx;
 
   var treeNodes, treeLinks;
   // var startTime = Date.now();
@@ -156,8 +151,6 @@ arrastre.vis.algorithms = (function(){
     })
 
     treeLinks = treeLinksArray;
-
-    // console.log(treeLinksArray);
   }
 
   function drawAdditionalBackground() {
@@ -166,7 +159,7 @@ arrastre.vis.algorithms = (function(){
       ctx.shadowColor = 'brown';
       ctx.shadowBlur = 40;
       ctx.globalAlpha = 0.15;
-      drawCircle(ctx, 1200 * Math.random(), 800 * Math.random(), 100 + 300 * Math.random());
+      arrastre.canvas.drawCircle(1200 * Math.random(), 800 * Math.random(), 100 + 300 * Math.random());
       ctx.shadowBlur = 0;
       ctx.globalAlpha = 1;
     }
@@ -192,7 +185,7 @@ arrastre.vis.algorithms = (function(){
         return;
 
       // console.log(node0);
-      drawLine(ctx, node0.x, node0.y, node1.x, node1.y);
+      arrastre.canvas.drawLine(node0.x, node0.y, node1.x, node1.y);
     });
 
     ctx.globalAlpha = 0.9;
@@ -206,7 +199,7 @@ arrastre.vis.algorithms = (function(){
       ctx.shadowBlur = 20;
 
       ctx.fillStyle = colorScale(node.depth);
-      drawCircle(ctx, node.x, node.y, radiusScale(node.depth));
+      arrastre.canvas.drawCircle(node.x, node.y, radiusScale(node.depth));
     });
 
     ctx.restore();
@@ -242,7 +235,6 @@ arrastre.vis.algorithms = (function(){
   }
 
   my.render = function() {
-
       var frame = arrastre.frameManager.currentFrame;
 
       if(!frame)
@@ -261,8 +253,7 @@ arrastre.vis.algorithms = (function(){
       // console.log(joints)
 
       clear();
-      drawBackground(ctx);
-      // drawAdditionalBackground();
+      arrastre.canvas.drawBackground();
       
       updateNodes(joints);
       drawTree();

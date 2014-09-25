@@ -8,8 +8,7 @@ arrastre.vis.computational = (function(){
   var xScale = d3.scale.linear().domain([-1.8, 0.2]).range([0, 1000]);
   var yScale = d3.scale.linear().domain([-0.2, 1.2]).range([1000, 0]);
 
-  var canvas = document.getElementById('mycanvas');
-  var ctx = canvas.getContext('2d');
+  var ctx = arrastre.canvas.ctx;
 
   var colors = {
     HipCenter : '#ff7f0e',
@@ -36,7 +35,7 @@ arrastre.vis.computational = (function(){
 
   my.render = function() {
 
-    ctx.globalAlpha = 0.1;
+    ctx.globalAlpha = 0.04;
 
     var frame = arrastre.frameManager.currentFrame;
 
@@ -45,7 +44,7 @@ arrastre.vis.computational = (function(){
 
     _.each(frame.Skeletons[0].Joints, function(joint, i) {
       ctx.fillStyle = colors[joint.JointType];
-      drawCircle(ctx, xScale(joint.Position.X), yScale(joint.Position.Y), 3);
+      arrastre.canvas.drawCircle(xScale(joint.Position.X), yScale(joint.Position.Y), 3);
     });
   }
 

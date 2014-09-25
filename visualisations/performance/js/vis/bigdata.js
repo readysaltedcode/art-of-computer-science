@@ -11,12 +11,9 @@ arrastre.vis.bigdata = (function(){
 
   var color = d3.scale.category20b();
   var scale = d3.scale.linear().domain([-3, 6]).range([1000, 0]);
-  var indexScale = d3.scale.threshold().domain([0, 53000, 70000, 84000, 120000, 153000, 167000, 200000, 230000]).range([0, 0, 4, 40, 10, 1, 60, 20, 10, 0]);
+  var indexScale = d3.scale.threshold().domain([0, 52000, 69000, 83000, 119000, 152000, 165000, 200000, 230000]).range([0, 0, 4, 40, 10, 1, 60, 20, 10, 0]);
 
-  var canvas = document.getElementById('mycanvas');
-  var ctx = canvas.getContext('2d');
-
-
+  var ctx = arrastre.canvas.ctx;
 
   my.render = function() {
 
@@ -25,7 +22,7 @@ arrastre.vis.bigdata = (function(){
       if(!frame)
         return;
 
-      var data = getDataOfSkeleton(frame, 0);
+      var data = arrastre.util.getDataOfSkeleton(frame, 0);
       // console.log(data);
 
       ctx.globalAlpha = 1;
@@ -53,14 +50,14 @@ arrastre.vis.bigdata = (function(){
         ctx.shadowBlur = 10;
 
         ctx.fillStyle = c;
-        drawCircle(ctx, x, y, 3);
+        arrastre.canvas.drawCircle(x, y, 3);
 
         ctx.save();
         // ctx.translate(-600, -600);
         // ctx.scale(4, 4);
         ctx.globalAlpha = 0.02;
         if(Math.random() > 0.9)
-          drawCircle(ctx, x, y, 100 + Math.random() * 100);
+          arrastre.canvas.drawCircle(x, y, 100 + Math.random() * 100);
         ctx.restore();
 
       });

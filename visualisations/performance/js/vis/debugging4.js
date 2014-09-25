@@ -11,22 +11,19 @@ arrastre.vis.debugging4 = (function(){
   var xScale = d3.scale.linear().domain([-1.5, 1.5]).range([0, width]);
   var yScale = d3.scale.linear().domain([-1.5, 1.5]).range([height, 0]);
 
-  var canvas = document.getElementById('mycanvas');
-  var ctx = canvas.getContext('2d');
-
-  ctx.fillStyle = "rgb(0,0,0)";
-  ctx.fillRect(0, 0, width, height);
+  var ctx = arrastre.canvas.ctx;
 
   my.render = function() {
 
     var frame = arrastre.frameManager.currentFrame;
     if(!frame) return;
 
-    var triangles = getTrianglesOfSkeleton(frame, 0);
+    var triangles = arrastre.util.getTrianglesOfSkeleton(frame, 0);
 
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";   // 0.01 a nice setting
     ctx.fillRect(0, 0, width, height);
- 
+    ctx.globalAlpha = 0.4;
+
     _.each(triangles, function(triangle, index) {
       ctx.fillStyle = color(index);
       ctx.beginPath();
@@ -46,7 +43,7 @@ arrastre.vis.debugging4 = (function(){
       ctx.fillStyle = color(15);
       var x = xScale(j.Position.X);
       var y = yScale(j.Position.Y);
-      drawCircle(ctx, x, y, 18);
+      arrastre.canvas.drawCircle(x, y, 18);
     });
   }
 
