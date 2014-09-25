@@ -19,7 +19,6 @@ arrastre.vis.algorithms = (function(){
   var ctx = arrastre.canvas.ctx;
 
   var treeNodes, treeLinks;
-  // var startTime = Date.now();
   var depth = 0;
 
   var tree = {
@@ -217,18 +216,13 @@ arrastre.vis.algorithms = (function(){
       var jointType = joint.JointType;
       var node = treeNodes[jointType];
 
-      // console.log(joint, node);
-
       var u = interpolationScale(arrastre.frameManager.ts);
       node.x = linearInterpolate(node.startX, xScale(joint.Position.X), u);
       node.y = linearInterpolate(node.startY, yScale(joint.Position.Y), u);
     });
-
-    // console.log(treeNodes);    
   }
 
   function clear() {
-    // ctx.globalAlpha = 0.9;
     var alpha = alphaScale(arrastre.frameManager.ts);
     ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     ctx.fillRect(0, 0, 1200, 800);
@@ -249,8 +243,6 @@ arrastre.vis.algorithms = (function(){
         return; 
 
       ctx.globalAlpha = 1;
-
-      // console.log(joints)
 
       clear();
       arrastre.canvas.drawBackground();

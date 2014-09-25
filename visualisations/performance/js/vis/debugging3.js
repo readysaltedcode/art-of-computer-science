@@ -23,7 +23,6 @@ arrastre.vis.debugging3 = (function(){
     ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
     ctx.fillRect(0, 0, width, height);
     ctx.globalAlpha = 0.4;
-
     ctx.fillStyle = '#aec7e8';
 
     _.each(triangles, function(triangle) {

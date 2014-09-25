@@ -6,50 +6,35 @@ arrastre.vis.boolean = (function(){
   var my = {};
 
   var width = 1200, height = 800;
-  // var startTime = Date.now();
 
-  // var color = d3.scale.category20();
   var color = d3.scale.linear().domain([-1, 0]).range(['white', 'blue']);
   var scale = d3.scale.linear().domain([-3, 3]).range([0, 255]);
 
-  // Duration 4:06
   var chanceOfBinary = d3.scale.linear().domain([0, 135000, 222000, 223000, 300000]).range([0, 0, 0.6, 0, 0]).clamp(true);
   var numCirclesScale = d3.scale.linear().domain([0, 135000, 222000, 223000, 300000]).range([0, 0, 4, 0, 0]).clamp(true);
-  // var textScale = d3.scale.linear().domain([0, 135000, 235000, 300000]).range([0, 0, 100, 100]).clamp(true);
 
   var ctx = arrastre.canvas.ctx;
 
   my.render = function() {
 
-    ctx.globalAlpha = 0.1;
-
     var frame = arrastre.frameManager.currentFrame;
-
     if(!frame)
       return;
 
     ctx.globalAlpha = 0.5;
-
     ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
     ctx.fillRect(0, 0, width, height);
 
-
     var ts = arrastre.frameManager.ts;
-
     var threshold = numCirclesScale(ts);
-
     var data = arrastre.util.getDataOfSkeleton(frame, 0);
 
     _.each(data, function(d, index) {
-      // console.log(index);
-
       if(index > threshold)
         return;
 
       var drawAsBinary = Math.random() < chanceOfBinary(ts);
       if(drawAsBinary) {
-
-        // var fontSize = Math.random() * textScale(t) + 8;
         var fontSize = 18;
         ctx.font = 'bold ' + fontSize + 'px sans-serif';
 
@@ -76,7 +61,6 @@ arrastre.vis.boolean = (function(){
         var y = Math.random() * height;
 
         ctx.fillStyle = color(d);
-
         arrastre.canvas.drawCircle(x, y, 3);
       }
     });
