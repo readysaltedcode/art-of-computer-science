@@ -17,10 +17,7 @@ arrastre.vis.boolean = (function(){
   var numCirclesScale = d3.scale.linear().domain([0, 135000, 222000, 223000, 300000]).range([0, 0, 4, 0, 0]).clamp(true);
   // var textScale = d3.scale.linear().domain([0, 135000, 235000, 300000]).range([0, 0, 100, 100]).clamp(true);
 
-  // var additionalBackgroundChance = d3.scale.linear().domain([startTime, startTime + 135000, startTime + 222000, startTime + 223000, startTime + 300000]).range([1, 0.98, 0.5, 0.98, 0.99]).clamp(true);
-
-  var canvas = document.getElementById('mycanvas');
-  var ctx = canvas.getContext('2d');
+  var ctx = arrastre.canvas.ctx;
 
   my.render = function() {
 
@@ -68,7 +65,7 @@ arrastre.vis.boolean = (function(){
             ctx.shadowColor = 'white';
             ctx.shadowBlur = 30;
             ctx.globalAlpha = 0.1;
-            arrastre.util.drawCircle(ctx, x, y, 100 * Math.random());
+            arrastre.canvas.drawCircle(x, y, 100 * Math.random());
             ctx.shadowBlur = 0;
             ctx.globalAlpha = 1;
           }
@@ -80,7 +77,7 @@ arrastre.vis.boolean = (function(){
 
         ctx.fillStyle = color(d);
 
-        arrastre.util.drawCircle(ctx, x, y, 3);
+        arrastre.canvas.drawCircle(x, y, 3);
       }
     });
   }

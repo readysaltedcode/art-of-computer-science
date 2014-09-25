@@ -11,8 +11,7 @@ arrastre.vis.debugging5 = (function(){
   var xScale = d3.scale.linear().domain([-1.5, 1.5]).range([0, width]);
   var yScale = d3.scale.linear().domain([-1.5, 1.5]).range([height, 0]);
 
-  var canvas = document.getElementById('mycanvas');
-  var ctx = canvas.getContext('2d');
+  var ctx = arrastre.canvas.ctx;
 
   ctx.fillStyle = "rgb(0,0,0)";
   ctx.fillRect(0, 0, width, height);

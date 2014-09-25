@@ -25,6 +25,7 @@ body {
   <script src="js/lodash.min.js"></script>
   <script src="js/d3.v3.min.js"></script>
   <script src="js/arrastre-util.js"></script>
+  <script src="js/arrastre-canvas.js"></script>
   <script src="js/datamanager.js"></script>
   <script src="js/framemanager.js"></script>
 
@@ -89,7 +90,7 @@ document.addEventListener('keydown', function(event) {
   var key = event.keyCode;
   if(_.has(keyboardMeta, +key)) {   // LOAD DATA
     stopTimer();
-    arrastre.util.clearCanvas(ctx);
+    arrastre.canvas.clearCanvas();
     selectedVis = keyboardMeta[key].vis;
     arrastre.dataManager.load(keyboardMeta[key].data);
   }
