@@ -53,7 +53,7 @@ function tick() {
   arrastre.frameManager.updateFrame();
   arrastre.vis[selectedVis].render();
 
-  // console.log(arrastre.frameManager.ts)
+  // d3.select('#info').text(arrastre.frameManager.ts);
 }
 
 function resetCanvas() {
@@ -81,9 +81,9 @@ var keyboardMeta = {
   52: {vis: 'debugging3', data: 'data/debugging3.json'}, // 4
   53: {vis: 'debugging4', data: 'data/debugging4.json'}, // 5
   54: {vis: 'debugging5', data: 'data/debugging5.json'}, // 6
-  55: {vis: 'algorithms', data: 'data/algorithms.json'}, // 7
+  55: {vis: 'algorithms', data: 'data/algboth.json'}, // 7
   56: {vis: 'bigdata', data: 'data/computational.json'}, // 8
-  57: {vis: 'computational', data: 'data/computational.json'}, // 9
+  57: {vis: 'computational', data: 'data/algboth.json'}, // 9
 }
 
 document.addEventListener('keydown', function(event) {

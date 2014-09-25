@@ -12,14 +12,13 @@ arrastre.vis.algorithms = (function(){
   var colorScale = d3.scale.linear().domain([0, 5]).range(['brown', 'yellow']);
 
   var interpolationScale = d3.scale.linear().domain([0, 32000, 156000, 200000, 330000]).range([0, 0, 0.1, 1, 1]).clamp(true);
-  var depthScale = d3.scale.linear().domain([0, 16000, 20000, 32000, 46000, 62000, 77000]).range([-1, 0, 1, 2, 3, 4, 5]).clamp(true);
+  var depthScale = d3.scale.threshold().domain([15500, 23000, 30800, 46200, 61800, 77000]).range([-1, 0, 1, 2, 3, 4, 5, 6]);
   var alphaScale = d3.scale.linear().domain([0, 330000]).range([0.01, 0.2]).clamp(true);
   var linkAlphaScale = d3.scale.linear().domain([0, 330000]).range([0, 1]).clamp(true);
 
   var ctx = arrastre.canvas.ctx;
 
   var treeNodes, treeLinks;
-  // var startTime = Date.now();
   var depth = 0;
 
   var tree = {
@@ -188,7 +187,7 @@ arrastre.vis.algorithms = (function(){
       arrastre.canvas.drawLine(node0.x, node0.y, node1.x, node1.y);
     });
 
-    ctx.globalAlpha = 0.9;
+    ctx.globalAlpha = 0.95;
   
     _.each(treeNodes, function(node) {
       // console.log(node.depth, depth);
@@ -217,18 +216,13 @@ arrastre.vis.algorithms = (function(){
       var jointType = joint.JointType;
       var node = treeNodes[jointType];
 
-      // console.log(joint, node);
-
       var u = interpolationScale(arrastre.frameManager.ts);
       node.x = linearInterpolate(node.startX, xScale(joint.Position.X), u);
       node.y = linearInterpolate(node.startY, yScale(joint.Position.Y), u);
     });
-
-    // console.log(treeNodes);    
   }
 
   function clear() {
-    // ctx.globalAlpha = 0.9;
     var alpha = alphaScale(arrastre.frameManager.ts);
     ctx.fillStyle = "rgba(0,0,0," + alpha + ")";
     ctx.fillRect(0, 0, 1200, 800);
@@ -241,7 +235,7 @@ arrastre.vis.algorithms = (function(){
         return;
 
       var ts = arrastre.frameManager.ts;
-      depth = Math.floor(depthScale(ts));
+      depth = depthScale(ts);
       // console.log(depth);
 
       var joints = getJointsOfSkeleton(frame, 0);
@@ -249,8 +243,6 @@ arrastre.vis.algorithms = (function(){
         return; 
 
       ctx.globalAlpha = 1;
-
-      // console.log(joints)
 
       clear();
       arrastre.canvas.drawBackground();

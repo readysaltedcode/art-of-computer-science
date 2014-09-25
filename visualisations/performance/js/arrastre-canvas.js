@@ -4,11 +4,14 @@ var arrastre = arrastre || {};
 arrastre.canvas = (function(){
   var my = {};
 
+  my.width = 1200;
+  my.height = 800;
+
   var canvas = document.getElementById('mycanvas');
   my.ctx = canvas.getContext('2d');
 
   my.ctx.fillStyle = "rgb(0,0,0)";
-  my.ctx.fillRect(0, 0, 1200, 800);
+  my.ctx.fillRect(0, 0, my.width, my.height);
 
   my.drawCircle = function(x, y, r) {
     my.ctx.beginPath();

@@ -3,14 +3,14 @@
 import json
 
 
-f = open('../../../captures-24-9-14/debugging/5.json')
+f = open('../../../captures-24-9-14/algorithms-fromquietbit.json')
 data = json.load(f)
 f.close()
 
 numSamples = len(data)
 # print numSamples
 
-out = open('debugging5.json', 'w', 0)
+out = open('alg2.json', 'w', 0)
 
 extendedData = []
 

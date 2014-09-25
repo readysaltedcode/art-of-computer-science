@@ -20,7 +20,7 @@ arrastre.vis.debugging4 = (function(){
 
     var triangles = arrastre.util.getTrianglesOfSkeleton(frame, 0);
 
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";   // 0.01 a nice setting
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, width, height);
     ctx.globalAlpha = 0.4;
 
