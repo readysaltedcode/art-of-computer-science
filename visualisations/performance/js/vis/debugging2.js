@@ -22,7 +22,7 @@ arrastre.vis.debugging2 = (function(){
     var frame = arrastre.frameManager.currentFrame;
     if(!frame) return;
 
-    var triangles = getTrianglesOfSkeleton(frame, 0);
+    var triangles = arrastre.util.getTrianglesOfSkeleton(frame, 0);
 
       ctx.fillStyle = "rgba(0, 0, 0, 0.01)";
       ctx.fillRect(0, 0, width, height);

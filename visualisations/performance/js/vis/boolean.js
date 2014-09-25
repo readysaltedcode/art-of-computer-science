@@ -41,7 +41,7 @@ arrastre.vis.boolean = (function(){
 
     var threshold = numCirclesScale(ts);
 
-    var data = getDataOfSkeleton(frame, 0);
+    var data = arrastre.util.getDataOfSkeleton(frame, 0);
 
     _.each(data, function(d, index) {
       // console.log(index);
@@ -68,7 +68,7 @@ arrastre.vis.boolean = (function(){
             ctx.shadowColor = 'white';
             ctx.shadowBlur = 30;
             ctx.globalAlpha = 0.1;
-            drawCircle(ctx, x, y, 100 * Math.random());
+            arrastre.util.drawCircle(ctx, x, y, 100 * Math.random());
             ctx.shadowBlur = 0;
             ctx.globalAlpha = 1;
           }
@@ -80,40 +80,10 @@ arrastre.vis.boolean = (function(){
 
         ctx.fillStyle = color(d);
 
-        drawCircle(ctx, x, y, 3);
+        arrastre.util.drawCircle(ctx, x, y, 3);
       }
     });
   }
 
   return my;
 }());
-
-
-
-//   function poll() {
-//     d3.json('/playbackServer/api/data.json', function(err, json) {
-//       if(json === undefined) return;
-
-//       var data = getDataOfSkeleton(json, 0);
-//       // console.log(data);
-//       // data = data.slice(0, 8);
-
-
-//       // ctx.font = '15px sans-serif';
-
-//       // var t = Date.now();
-
-//       // drawAdditionalBackground(t);
-
-//   }
-
-
-
-//   ctx.fillStyle = "rgb(0,0,0)";
-//   ctx.fillRect(0, 0, width, height);
-
-//   // poll();
-//   setInterval(poll, 50);
- 
-// </script>
-// </body>

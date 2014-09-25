@@ -22,7 +22,7 @@ arrastre.vis.debugging3 = (function(){
     var frame = arrastre.frameManager.currentFrame;
     if(!frame) return;
 
-    var triangles = getTrianglesOfSkeleton(frame, 0);
+    var triangles = arrastre.util.getTrianglesOfSkeleton(frame, 0);
 
     ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
     ctx.fillRect(0, 0, width, height);
@@ -47,7 +47,7 @@ arrastre.vis.debugging3 = (function(){
 
       var x = xScale(j.Position.X);
       var y = yScale(j.Position.Y);
-      drawCircle(ctx, x, y, 18);
+      arrastre.util.drawCircle(ctx, x, y, 18);
     });
 
     }

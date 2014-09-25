@@ -166,7 +166,7 @@ arrastre.vis.algorithms = (function(){
       ctx.shadowColor = 'brown';
       ctx.shadowBlur = 40;
       ctx.globalAlpha = 0.15;
-      drawCircle(ctx, 1200 * Math.random(), 800 * Math.random(), 100 + 300 * Math.random());
+      arrastre.util.drawCircle(ctx, 1200 * Math.random(), 800 * Math.random(), 100 + 300 * Math.random());
       ctx.shadowBlur = 0;
       ctx.globalAlpha = 1;
     }
@@ -192,7 +192,7 @@ arrastre.vis.algorithms = (function(){
         return;
 
       // console.log(node0);
-      drawLine(ctx, node0.x, node0.y, node1.x, node1.y);
+      arrastre.util.drawLine(ctx, node0.x, node0.y, node1.x, node1.y);
     });
 
     ctx.globalAlpha = 0.9;
@@ -206,7 +206,7 @@ arrastre.vis.algorithms = (function(){
       ctx.shadowBlur = 20;
 
       ctx.fillStyle = colorScale(node.depth);
-      drawCircle(ctx, node.x, node.y, radiusScale(node.depth));
+      arrastre.util.drawCircle(ctx, node.x, node.y, radiusScale(node.depth));
     });
 
     ctx.restore();
@@ -261,8 +261,7 @@ arrastre.vis.algorithms = (function(){
       // console.log(joints)
 
       clear();
-      drawBackground(ctx);
-      // drawAdditionalBackground();
+      arrastre.util.drawBackground(ctx);
       
       updateNodes(joints);
       drawTree();

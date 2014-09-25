@@ -41,6 +41,7 @@ body {
   <script>
 
 var selectedVis = null;
+
 var canvas = document.getElementById('mycanvas');
 var ctx = canvas.getContext('2d');
 
@@ -62,6 +63,7 @@ function resetCanvas() {
 
 var timer = null;
 function startTimer() {
+  stopTimer();
   timer = setInterval(tick, 50);
 }
 
@@ -87,7 +89,7 @@ document.addEventListener('keydown', function(event) {
   var key = event.keyCode;
   if(_.has(keyboardMeta, +key)) {   // LOAD DATA
     stopTimer();
-    clearCanvas(ctx);
+    arrastre.util.clearCanvas(ctx);
     selectedVis = keyboardMeta[key].vis;
     arrastre.dataManager.load(keyboardMeta[key].data);
   }

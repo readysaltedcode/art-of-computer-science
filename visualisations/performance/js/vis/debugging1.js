@@ -22,7 +22,7 @@ arrastre.vis.debugging1 = (function(){
     var frame = arrastre.frameManager.currentFrame;
     if(!frame) return;
 
-    var triangles = getTrianglesOfSkeleton(frame, 0);
+    var triangles = arrastre.util.getTrianglesOfSkeleton(frame, 0);
 
     ctx.globalAlpha = 0.02;
 

@@ -45,7 +45,7 @@ arrastre.vis.computational = (function(){
 
     _.each(frame.Skeletons[0].Joints, function(joint, i) {
       ctx.fillStyle = colors[joint.JointType];
-      drawCircle(ctx, xScale(joint.Position.X), yScale(joint.Position.Y), 3);
+      arrastre.util.drawCircle(ctx, xScale(joint.Position.X), yScale(joint.Position.Y), 3);
     });
   }
 

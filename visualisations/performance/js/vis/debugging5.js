@@ -24,7 +24,7 @@ arrastre.vis.debugging5 = (function(){
 
     // console.log(frame);
 
-    var triangles = getTrianglesOfSkeleton(frame, 0);
+    var triangles = arrastre.util.getTrianglesOfSkeleton(frame, 0);
 
     ctx.fillStyle = "rgba(0, 0, 0, 1)";
     ctx.fillRect(0, 0, width, height);
@@ -48,7 +48,7 @@ arrastre.vis.debugging5 = (function(){
       ctx.fillStyle = color(15);
       var x = xScale(j.Position.X);
       var y = yScale(j.Position.Y);
-      drawCircle(ctx, x, y, 18);
+      arrastre.util.drawCircle(ctx, x, y, 18);
     });
 
   }

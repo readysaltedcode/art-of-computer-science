@@ -25,7 +25,7 @@ arrastre.vis.bigdata = (function(){
       if(!frame)
         return;
 
-      var data = getDataOfSkeleton(frame, 0);
+      var data = arrastre.util.getDataOfSkeleton(frame, 0);
       // console.log(data);
 
       ctx.globalAlpha = 1;
@@ -53,14 +53,14 @@ arrastre.vis.bigdata = (function(){
         ctx.shadowBlur = 10;
 
         ctx.fillStyle = c;
-        drawCircle(ctx, x, y, 3);
+        arrastre.util.drawCircle(ctx, x, y, 3);
 
         ctx.save();
         // ctx.translate(-600, -600);
         // ctx.scale(4, 4);
         ctx.globalAlpha = 0.02;
         if(Math.random() > 0.9)
-          drawCircle(ctx, x, y, 100 + Math.random() * 100);
+          arrastre.util.drawCircle(ctx, x, y, 100 + Math.random() * 100);
         ctx.restore();
 
       });
