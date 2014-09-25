@@ -8,8 +8,8 @@ arrastre.vis.debugging2 = (function(){
   var width = 1200, height = 800;
 
   var color = d3.scale.category20();
-  var xScale = d3.scale.linear().domain([-1, 1]).range([0, width]);
-  var yScale = d3.scale.linear().domain([-0.5, 1.5]).range([height, 0]);
+  var xScale = d3.scale.linear().domain([-0.9, 0.9]).range([0, width]);
+  var yScale = d3.scale.linear().domain([-0.6, 1.2]).range([height, 0]);
 
   var ctx = arrastre.canvas.ctx;
 

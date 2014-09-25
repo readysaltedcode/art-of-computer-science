@@ -9,7 +9,7 @@ arrastre.vis.fade = (function(){
   var ctx = canvas.getContext('2d');
 
   my.render = function() {
-    ctx.globalAlpha = 0.1;
+    ctx.globalAlpha = 0.03;
     ctx.shadowBlur = 0;
     ctx.fillStyle = "rgb(0, 0, 0)";
     ctx.fillRect(0, 0, 1200, 800);

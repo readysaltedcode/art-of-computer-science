@@ -50,7 +50,7 @@ arrastre.vis.boolean = (function(){
       if(drawAsBinary) {
 
         // var fontSize = Math.random() * textScale(t) + 8;
-        var fontSize = 12;
+        var fontSize = 18;
         ctx.font = 'bold ' + fontSize + 'px sans-serif';
 
         var binary = Math.round(scale(d)).toString(2);

@@ -5,8 +5,8 @@ arrastre.vis = arrastre.vis || {};
 arrastre.vis.computational = (function(){
   var my = {};
 
-  var xScale = d3.scale.linear().domain([-1.8, 0.2]).range([0, 1000]);
-  var yScale = d3.scale.linear().domain([-0.2, 1.2]).range([1000, 0]);
+  var xScale = d3.scale.linear().domain([-0.8, 0.5]).range([0, 1000]);
+  var yScale = d3.scale.linear().domain([-0.2, 1]).range([1000, 0]);
 
   var ctx = arrastre.canvas.ctx;
 
@@ -35,7 +35,8 @@ arrastre.vis.computational = (function(){
 
   my.render = function() {
 
-    ctx.globalAlpha = 0.06;
+    ctx.globalAlpha = 0.15;
+    // ctx.globalAlpha = 0.2;
 
     var frame = arrastre.frameManager.currentFrame;
 
