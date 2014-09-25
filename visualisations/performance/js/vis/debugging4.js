@@ -26,7 +26,8 @@ arrastre.vis.debugging4 = (function(){
 
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";   // 0.01 a nice setting
     ctx.fillRect(0, 0, width, height);
- 
+    ctx.globalAlpha = 0.4;
+
     _.each(triangles, function(triangle, index) {
       ctx.fillStyle = color(index);
       ctx.beginPath();

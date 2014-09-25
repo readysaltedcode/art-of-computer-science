@@ -8,8 +8,8 @@ arrastre.vis.debugging1 = (function(){
   var width = 1200, height = 800;
 
   var color = d3.scale.category20();
-  var xScale = d3.scale.linear().domain([-1.5, 1.5]).range([0, width]);
-  var yScale = d3.scale.linear().domain([-1.5, 1.5]).range([height, 0]);
+  var xScale = d3.scale.linear().domain([-1, 1]).range([0, width]);
+  var yScale = d3.scale.linear().domain([-0.5, 1.5]).range([height, 0]);
 
   var canvas = document.getElementById('mycanvas');
   var ctx = canvas.getContext('2d');
@@ -23,6 +23,8 @@ arrastre.vis.debugging1 = (function(){
     if(!frame) return;
 
     var triangles = getTrianglesOfSkeleton(frame, 0);
+
+    ctx.globalAlpha = 0.02;
 
     ctx.beginPath();
     ctx.fillStyle = '#aec7e8';

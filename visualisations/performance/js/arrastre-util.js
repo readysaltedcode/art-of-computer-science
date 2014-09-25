@@ -84,3 +84,10 @@ function drawBackground(ctx) {
     drawCircle(ctx, 1200 * Math.random(), 800 * Math.random(), 2 * Math.random());
   }
 }
+
+function clearCanvas(ctx) {
+  ctx.globalAlpha = 1;
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = "rgb(0, 0, 0)";
+  ctx.fillRect(0, 0, 1200, 800);
+}
