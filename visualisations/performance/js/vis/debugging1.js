@@ -13,9 +13,6 @@ arrastre.vis.debugging1 = (function(){
 
   var ctx = arrastre.canvas.ctx;
 
-  ctx.fillStyle = "rgb(0,0,0)";
-  ctx.fillRect(0, 0, width, height);
-
   my.render = function() {
 
     var frame = arrastre.frameManager.currentFrame;

@@ -13,7 +13,7 @@ arrastre.vis.boolean = (function(){
   var scale = d3.scale.linear().domain([-3, 3]).range([0, 255]);
 
   // Duration 4:06
-  var chanceOfBinary = d3.scale.linear().domain([0, 145000, 222000, 223000, 300000]).range([0, 0, 0.6, 0, 0]).clamp(true);
+  var chanceOfBinary = d3.scale.linear().domain([0, 135000, 222000, 223000, 300000]).range([0, 0, 0.6, 0, 0]).clamp(true);
   var numCirclesScale = d3.scale.linear().domain([0, 135000, 222000, 223000, 300000]).range([0, 0, 4, 0, 0]).clamp(true);
   // var textScale = d3.scale.linear().domain([0, 135000, 235000, 300000]).range([0, 0, 100, 100]).clamp(true);
 

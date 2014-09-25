@@ -7,6 +7,9 @@ arrastre.canvas = (function(){
   var canvas = document.getElementById('mycanvas');
   my.ctx = canvas.getContext('2d');
 
+  my.ctx.fillStyle = "rgb(0,0,0)";
+  my.ctx.fillRect(0, 0, 1200, 800);
+
   my.drawCircle = function(x, y, r) {
     my.ctx.beginPath();
     my.ctx.arc(x, y, r, 0, 2 * Math.PI, false);

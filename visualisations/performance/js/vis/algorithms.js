@@ -18,9 +18,6 @@ arrastre.vis.algorithms = (function(){
 
   var ctx = arrastre.canvas.ctx;
 
-  ctx.fillStyle = "rgb(0,0,0)";
-  ctx.fillRect(0, 0, 1200, 800);
-
   var treeNodes, treeLinks;
   // var startTime = Date.now();
   var depth = 0;
@@ -154,8 +151,6 @@ arrastre.vis.algorithms = (function(){
     })
 
     treeLinks = treeLinksArray;
-
-    // console.log(treeLinksArray);
   }
 
   function drawAdditionalBackground() {
@@ -240,7 +235,6 @@ arrastre.vis.algorithms = (function(){
   }
 
   my.render = function() {
-
       var frame = arrastre.frameManager.currentFrame;
 
       if(!frame)

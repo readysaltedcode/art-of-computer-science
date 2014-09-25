@@ -11,7 +11,7 @@ arrastre.vis.bigdata = (function(){
 
   var color = d3.scale.category20b();
   var scale = d3.scale.linear().domain([-3, 6]).range([1000, 0]);
-  var indexScale = d3.scale.threshold().domain([0, 53000, 70000, 84000, 120000, 153000, 167000, 200000, 230000]).range([0, 0, 4, 40, 10, 1, 60, 20, 10, 0]);
+  var indexScale = d3.scale.threshold().domain([0, 52000, 69000, 83000, 119000, 152000, 165000, 200000, 230000]).range([0, 0, 4, 40, 10, 1, 60, 20, 10, 0]);
 
   var ctx = arrastre.canvas.ctx;
 

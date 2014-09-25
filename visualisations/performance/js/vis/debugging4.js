@@ -13,9 +13,6 @@ arrastre.vis.debugging4 = (function(){
 
   var ctx = arrastre.canvas.ctx;
 
-  ctx.fillStyle = "rgb(0,0,0)";
-  ctx.fillRect(0, 0, width, height);
-
   my.render = function() {
 
     var frame = arrastre.frameManager.currentFrame;
@@ -46,7 +43,7 @@ arrastre.vis.debugging4 = (function(){
       ctx.fillStyle = color(15);
       var x = xScale(j.Position.X);
       var y = yScale(j.Position.Y);
-      arrastre.util.drawCircle(ctx, x, y, 18);
+      arrastre.canvas.drawCircle(x, y, 18);
     });
   }
 
