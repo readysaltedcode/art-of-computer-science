@@ -14,7 +14,7 @@ arrastre.vis.computational = (function(){
     HipCenter : '#ff7f0e',
     Spine : '#ff7f0e',
     ShoulderCenter : '#ff7f0e',
-    Head : '#e7cb94',
+    Head : 'blue',
     ShoulderLeft : '#bd9e39',
     ElbowLeft : '#bd9e39',
     WristLeft : '#bd9e39',
