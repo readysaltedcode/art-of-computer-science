@@ -1,6 +1,3 @@
-To get visualisations up and running:
+The visualisations for live performance are in the performance directory.
 
-- run playback server: navigate to playbackServer directory and run python serve.py
-
-- set up a local webserver in this directory (visualisations) and navigate to it in your browser
-
+To playback, open the performance directory in a web browser (preferably Chrome). See performance/readme.txt for further playback instructions.
