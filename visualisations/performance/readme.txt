@@ -15,3 +15,6 @@ a: fade and end playback
 
 
 So typically you'll press a number to preload the vis, then 's' to start playback.
+
+If you wish to combine this page with the live Kinect stream, you must start KinectServer running on localhost:8111
+and use the live.html variant.
