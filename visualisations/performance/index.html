@@ -1,0 +1,108 @@
+<html>
+<style>
+body {
+  background-color: black;
+}
+
+#wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#info {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: white;
+}
+</style>
+<body>
+  <div id="wrapper">
+    <canvas id="mycanvas" width="1200" height="800"></canvas>
+    <div id="info"></div>
+  </div>
+
+  <script src="js/lodash.min.js"></script>
+  <script src="js/d3.v3.min.js"></script>
+  <script src="js/arrastre-util.js"></script>
+  <script src="js/arrastre-canvas.js"></script>
+  <script src="js/datamanager.js"></script>
+  <script src="js/framemanager.js"></script>
+
+  <script src="js/vis/bigdata.js"></script>
+  <script src="js/vis/debugging1.js"></script>
+  <script src="js/vis/debugging2.js"></script>
+  <script src="js/vis/debugging3.js"></script>
+  <script src="js/vis/debugging4.js"></script>
+  <script src="js/vis/debugging5.js"></script>
+  <script src="js/vis/algorithms.js"></script>
+  <script src="js/vis/boolean.js"></script>
+  <script src="js/vis/computational.js"></script>
+  <script src="js/vis/fade.js"></script>
+  <script>
+
+var selectedVis = null;
+
+var canvas = document.getElementById('mycanvas');
+var ctx = canvas.getContext('2d');
+
+function tick() {
+  if(!selectedVis)
+    return;
+
+  arrastre.frameManager.updateFrame();
+  arrastre.vis[selectedVis].render();
+
+  // d3.select('#info').text(arrastre.frameManager.ts);
+}
+
+function resetCanvas() {
+  // reset Canvas settings to defaults
+  ctx.globalAlpha = 1;
+  ctx.shadowBlur = 0;
+}
+
+var timer = null;
+function startTimer() {
+  stopTimer();
+  timer = setInterval(tick, 50);
+}
+
+function stopTimer() {
+  clearInterval(timer);
+}
+// setInterval(tick, 1000);
+
+// Keyboard events
+var keyboardMeta = {
+  49: {vis: 'boolean', data: 'data/computational.json'}, // 1
+  50: {vis: 'debugging1', data: 'data/debugging1.json'}, // 2 
+  51: {vis: 'debugging2', data: 'data/debugging2.json'}, // 3
+  52: {vis: 'debugging3', data: 'data/debugging3.json'}, // 4
+  53: {vis: 'debugging4', data: 'data/debugging4.json'}, // 5
+  54: {vis: 'debugging5', data: 'data/debugging5.json'}, // 6
+  55: {vis: 'algorithms', data: 'data/algboth.json'}, // 7
+  56: {vis: 'bigdata', data: 'data/computational.json'}, // 8
+  57: {vis: 'computational', data: 'data/algboth.json'}, // 9
+}
+
+document.addEventListener('keydown', function(event) {
+  var key = event.keyCode;
+  if(_.has(keyboardMeta, +key)) {   // LOAD DATA
+    stopTimer();
+    arrastre.canvas.clearCanvas();
+    selectedVis = keyboardMeta[key].vis;
+    arrastre.dataManager.load(keyboardMeta[key].data);
+  }
+  else if(key == 83) { //s   START VISUALISATION
+    arrastre.frameManager.reset();
+    startTimer();
+  }
+  else if(key == 65) { //a    FADE
+    resetCanvas();
+    selectedVis = 'fade';
+  }
+});
+ 
+</script>
+</body>
